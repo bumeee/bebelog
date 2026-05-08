@@ -312,6 +312,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
+    .fullview-grid--half {
+      grid-template-columns: repeat(2, minmax(0, 480px));
+      justify-content: center;
+    }
     .fullview-item {
       overflow: hidden;
       border-radius: 2px;
@@ -327,9 +331,11 @@
     .fullview-item:hover img { transform: scale(1.02); }
     @media (max-width: 768px) {
       .fullview-grid { grid-template-columns: 1fr; }
+      .fullview-grid--half { grid-template-columns: 1fr; }
     }
 
     /* ── CONCEPT ALL ── */
+    .concept-all {
       margin-top: 3rem;
       text-align: center;
     }
@@ -342,10 +348,11 @@
       text-transform: uppercase;
     }
     .concept-all img {
-      width: 100%;
-      max-width: 900px;
+      width: auto;
+      max-width: min(900px, 100%);
       border-radius: 2px;
-      display: inline-block;
+      display: block;
+      margin: 0 auto;
     }
 
     @media (max-width: 768px) {
@@ -784,12 +791,12 @@
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Hwaseong · Premium Self Studio</p>
+    <p class="hero-eyebrow">Dongtan · Premium Self Studio</p>
     <h1 class="hero-title">공간대여 &amp; 셀프 촬영<br><em>베이비 스튜디오</em></h1>
     <p class="hero-title-sub">베베로그 스튜디오</p>
     <p class="hero-subtitle">
-      프리미엄 의상과 아름다운 공간에서<br>
-      오롯이 우리 가족만의 시간으로
+      낯가림 없이 활짝,<br>
+      부모님의 시선으로 담는 자연스러운 미소
     </p>
     <a href="#reservation" class="hero-cta">
       <span class="hero-cta-text">예약하기</span>
@@ -811,7 +818,7 @@
   <div class="about-grid">
     <div class="reveal">
       <p class="section-tag">About Studio</p>
-      <h2 class="about-heading">단 한 번뿐인<br><em>첫 생일</em>의<br>기억</h2>
+      <h2 class="about-heading">백일의 첫 미소부터<br><em>두돌</em>의<br>발걸음까지,</h2>
       <p class="about-body">
         <strong style="font-size:1.05rem;color:var(--charcoal);font-weight:500;">준비는 최소로, 만족은 최대로.</strong><br><br>
         상차림 세팅 · 5가지 포토존 · 드레스 / 수트 / 한복 대여까지<br>
@@ -851,6 +858,7 @@
       <button class="concept-tab-btn" onclick="switchConcept(3, this)">컨셉 4</button>
       <button class="concept-tab-btn" onclick="switchConcept(4, this)">컨셉 5</button>
       <button class="concept-tab-btn" onclick="switchConcept(5, this)">스튜디오 전경</button>
+      <button class="concept-tab-btn" onclick="switchConcept(6, this)">수유실</button>
     </div>
 
     <!-- 컨셉 패널 -->
@@ -917,6 +925,13 @@
           <div class="fullview-item"><img src="Full_view_2.webp" alt="스튜디오 전경 2" loading="lazy"></div>
           <div class="fullview-item"><img src="Full_view_3.webp" alt="스튜디오 전경 3" loading="lazy"></div>
           <div class="fullview-item"><img src="Full_view_4.webp" alt="스튜디오 전경 4" loading="lazy"></div>
+        </div>
+      </div>
+      <!-- 수유실 -->
+      <div class="concept-panel" id="concept-6">
+        <div class="fullview-grid fullview-grid--half">
+          <div class="fullview-item"><img src="suyu_1.webp" alt="수유실 1" loading="lazy"></div>
+          <div class="fullview-item"><img src="suyu_2.webp" alt="수유실 2" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -1224,10 +1239,10 @@
   </div>
   <div class="footer-info">
     베베로그 셀프스튜디오<br>
-    경기도 화성시 · 매일 08:00 – 22:00 · 연중무휴
+    경기도 화성시 동탄대로시범길 134 카림애비뉴 0088호 · 매일 08:00 – 22:00 · 연중무휴
   </div>
   <div class="footer-links">
-    <a href="#">인스타그램</a>
+    <a href=""https://www.instagram.com/bebelog_studio?igsh=OG5waTJqYm5idDN5&utm_source=qr" target="_blank">인스타그램</a>
     <a href="https://map.naver.com/p/entry/place/2025048254" target="_blank">네이버 플레이스</a>
     <a href="http://pf.kakao.com/_lYixkn" target="_blank">카카오 채널</a>
   </div>
