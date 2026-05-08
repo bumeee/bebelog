@@ -74,53 +74,72 @@
     }
     .nav-reserve:hover { background: var(--deep-rose) !important; color: var(--cream) !important; }
 
-    /* ── HERO ── */
+    /* ── HERO SLIDESHOW ── */
     .hero {
+      position: relative;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       overflow: hidden;
     }
-    .hero-left {
-      background: var(--cream);
+    .hero-slides {
+      position: absolute; inset: 0;
+    }
+    .hero-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(30,20,15,0.62) 0%,
+        rgba(30,20,15,0.35) 50%,
+        rgba(30,20,15,0.1) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 8rem 4rem 4rem 6rem;
-      position: relative;
-    }
-    .hero-left::after {
-      content: '';
-      position: absolute;
-      right: -1px; top: 10%; bottom: 10%;
-      width: 1px; background: var(--blush);
+      padding: 8rem 8rem 4rem;
+      max-width: 680px;
     }
     .hero-eyebrow {
       font-size: 0.72rem;
       letter-spacing: 0.35em;
-      color: var(--rose);
+      color: rgba(232,213,200,0.85);
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.2s forwards;
     }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5vw, 4.8rem);
+      font-size: clamp(2.8rem, 5vw, 5rem);
       font-weight: 300;
       line-height: 1.15;
-      color: var(--charcoal);
+      color: #fff;
       margin-bottom: 1.2rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s forwards;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
-    .hero-title em { font-style: italic; color: var(--deep-rose); }
+    .hero-title em { font-style: italic; color: var(--rose); }
     .hero-subtitle {
       font-family: 'Noto Serif KR', serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 300;
       line-height: 2;
-      color: var(--muted);
+      color: rgba(255,255,255,0.82);
       margin-bottom: 3rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.6s forwards;
@@ -133,44 +152,47 @@
       opacity: 0;
       animation: fadeUp 0.8s 0.8s forwards;
     }
-    .hero-cta-text { font-size: 0.88rem; font-weight: 400; letter-spacing: 0.2em; color: var(--charcoal); }
-    .hero-cta-line { width: 48px; height: 1px; background: var(--deep-rose); transition: width 0.4s; }
+    .hero-cta-text { font-size: 0.88rem; font-weight: 400; letter-spacing: 0.2em; color: #fff; }
+    .hero-cta-line { width: 48px; height: 1px; background: var(--rose); transition: width 0.4s; }
     .hero-cta:hover .hero-cta-line { width: 80px; }
-    .hero-cta:hover .hero-cta-text { color: var(--deep-rose); }
-    .hero-right { background: var(--blush); position: relative; overflow: hidden; }
-    .hero-image-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(145deg, #ecddd5 0%, #dfc7b8 50%, #d4b5a3 100%);
-    }
-    .photo-frame {
-      width: 260px; height: 340px;
-      border: 1px solid rgba(255,255,255,0.6);
+    .hero-cta:hover .hero-cta-text { color: var(--rose); }
+
+    /* 화살표 */
+    .hero-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      width: 48px; height: 48px;
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      transform: rotate(-2deg);
-      box-shadow: 20px 20px 60px rgba(100,60,40,0.15);
-      background: var(--warm-white);
-      opacity: 0;
-      animation: fadeIn 1s 1s forwards;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+      backdrop-filter: blur(4px);
     }
-    .photo-frame-inner {
-      width: 220px; height: 290px;
-      background: linear-gradient(160deg, #f0e4db, #e8d4c8);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.5rem;
+    .hero-arrow:hover { background: rgba(255,255,255,0.3); }
+    .hero-arrow.prev { left: 1.5rem; }
+    .hero-arrow.next { right: 1.5rem; }
+
+    /* 도트 */
+    .hero-dots {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex; gap: 0.5rem;
     }
-    .photo-note {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 0.9rem;
-      color: rgba(156,110,90,0.7);
-      letter-spacing: 0.05em;
-      opacity: 0;
-      animation: fadeIn 1s 1.3s forwards;
+    .hero-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
     }
+    .hero-dot.active { background: #fff; transform: scale(1.3); }
 
     /* ── DIVIDER ── */
     .section-divider {
@@ -267,6 +289,19 @@
     .options-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--blush); }
     .option-card { background: var(--warm-white); padding: 2rem 1.8rem; transition: background 0.3s; }
     .option-card:hover { background: var(--cream); }
+
+    .option-img {
+      width: 100%; height: 140px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .option-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .option-card:hover .option-img img { transform: scale(1.05); }
+
     .option-icon { font-size: 1.5rem; margin-bottom: 1rem; }
     .option-name { font-family: 'Noto Serif KR', serif; font-size: 0.92rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.5rem; line-height: 1.6; }
     .option-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
@@ -406,6 +441,61 @@
       .costume-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+
+    /* ── PATH GUIDE ── */
+    .path-guide {
+      margin-top: 3rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 6rem;
+    }
+    .path-guide-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 1.2rem;
+    }
+    .path-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .path-scroll::-webkit-scrollbar { height: 4px; }
+    .path-scroll::-webkit-scrollbar-track { background: var(--blush); }
+    .path-scroll::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 2px; }
+    .path-item {
+      position: relative;
+      flex-shrink: 0;
+      width: 200px;
+      scroll-snap-align: start;
+    }
+    .path-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border: 1px solid var(--blush);
+    }
+    .path-step {
+      position: absolute;
+      top: 0.5rem; left: 0.5rem;
+      background: var(--charcoal);
+      color: var(--cream);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .path-guide { padding: 0 1.5rem; margin-top: 2rem; }
+      .path-item { width: 160px; }
+      .path-item img { height: 200px; }
+    }
+
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     .reveal { opacity:0; transform:translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -414,10 +504,8 @@
     @media (max-width: 768px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 6rem 1.5rem 3rem; }
-      .hero-left::after { display: none; }
-      .hero-right { height: 280px; }
+      .hero-content { padding: 7rem 1.5rem 4rem; }
+      .hero-arrow { width: 36px; height: 36px; font-size: 0.9rem; }
       .about { padding: 3rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .costume { padding: 3rem 1.5rem; }
@@ -459,9 +547,19 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SLIDESHOW -->
 <section class="hero">
-  <div class="hero-left">
+  <div class="hero-slides">
+    <div class="hero-slide active"><img src="main_6.webp" alt="베베로그 스튜디오" loading="eager"></div>
+    <div class="hero-slide"><img src="main_7.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_1.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_2.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_3.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_4.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_5.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
     <p class="hero-eyebrow">Hwaseong · Premium Self Studio</p>
     <h1 class="hero-title">
       아이의 가장<br><em>빛나는 순간</em>을<br>직접 담으세요
@@ -475,17 +573,9 @@
       <span class="hero-cta-line"></span>
     </a>
   </div>
-  <div class="hero-right">
-    <div class="hero-image-placeholder">
-      <div class="photo-frame">
-        <div class="photo-frame-inner">
-          <span style="font-size:1.8rem;opacity:0.4;color:var(--rose);">✦</span>
-          <p style="font-size:0.75rem;letter-spacing:0.1em;color:var(--rose);opacity:0.6;text-align:center;">대표 사진을<br>여기에 넣어주세요</p>
-        </div>
-      </div>
-      <p class="photo-note">your precious moment</p>
-    </div>
-  </div>
+  <button class="hero-arrow prev" onclick="heroSlide(-1)">&#8592;</button>
+  <button class="hero-arrow next" onclick="heroSlide(1)">&#8594;</button>
+  <div class="hero-dots" id="heroDots"></div>
 </section>
 
 <!-- ABOUT -->
@@ -632,7 +722,7 @@
         <div class="option-price">35,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
       </div>
       <div class="option-card">
-        <div class="option-icon">🎀</div>
+        <div class="option-img"><img src="topper_1.webp" alt="이름 토퍼" loading="lazy"></div>
         <div class="option-name">아기 이름 토퍼</div>
         <div class="option-desc">맞춤 제작 이름 토퍼로 더욱 특별하게</div>
         <div class="option-price">20,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
@@ -644,7 +734,7 @@
         <div class="option-price">30,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
       </div>
       <div class="option-card">
-        <div class="option-icon">🖼️</div>
+        <div class="option-img"><img src="fabric_frame.webp" alt="패브릭 액자" loading="lazy"></div>
         <div class="option-name">패브릭 액자 제작</div>
         <div class="option-desc">촬영 사진으로 만드는 고급 패브릭 액자</div>
         <div class="option-price">40,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
@@ -717,7 +807,7 @@
   <div class="map-section-header reveal">
     <p class="section-tag">Location</p>
     <h2 class="map-section-title"><em>오시는</em> 길</h2>
-    <p class="map-section-sub">경기도 화성시 위치</p>
+    <p class="map-section-sub">경기도 화성시 동탄대로시범길 134 카림애비뉴 0088호</p>
   </div>
   <div class="map-wrap reveal">
     <div class="map-embed">
@@ -732,7 +822,7 @@
         <div class="map-info-icon">📍</div>
         <div>
           <div class="map-info-label">주소</div>
-          <div class="map-info-text">경기도 화성시<br><!-- 정확한 주소 입력해주세요 -->상세 주소를 입력해주세요</div>
+          <div class="map-info-text">경기도 화성시 동탄대로시범길 134<br>카림애비뉴 지하1층 0088호</div>
         </div>
       </div>
       <div class="map-info-item">
@@ -746,16 +836,32 @@
         <div class="map-info-icon">🚗</div>
         <div>
           <div class="map-info-label">주차</div>
-          <div class="map-info-text"><!-- 주차 안내 수정해주세요 -->주차 안내를 입력해주세요</div>
+          <div class="map-info-text">카림애비뉴 지하주차장 이용<br>(지하 1층: A5 게이트 → 0088호)<br>※ 유보라 아이비파크4 주차장 아님</div>
         </div>
       </div>
       <div class="map-info-item">
         <div class="map-info-icon">📞</div>
         <div>
           <div class="map-info-label">문의</div>
-          <div class="map-info-text">카카오 채널 또는<br>네이버 플레이스 채팅</div>
+          <div class="map-info-text">010-3377-6421<br>카카오채널 · 네이버 플레이스 채팅</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 오시는길 사진 가이드 -->
+  <div class="path-guide reveal">
+    <h3 class="path-guide-title">📸 이렇게 오세요</h3>
+    <div class="path-scroll">
+      <div class="path-item"><img src="path_01.webp" alt="오시는길 1" loading="lazy"><span class="path-step">01</span></div>
+      <div class="path-item"><img src="path_02.webp" alt="오시는길 2" loading="lazy"><span class="path-step">02</span></div>
+      <div class="path-item"><img src="path_03.webp" alt="오시는길 3" loading="lazy"><span class="path-step">03</span></div>
+      <div class="path-item"><img src="path_04.webp" alt="오시는길 4" loading="lazy"><span class="path-step">04</span></div>
+      <div class="path-item"><img src="path_05.webp" alt="오시는길 5" loading="lazy"><span class="path-step">05</span></div>
+      <div class="path-item"><img src="path_06.webp" alt="오시는길 6" loading="lazy"><span class="path-step">06</span></div>
+      <div class="path-item"><img src="path_07.webp" alt="오시는길 7" loading="lazy"><span class="path-step">07</span></div>
+      <div class="path-item"><img src="path_08.webp" alt="오시는길 8" loading="lazy"><span class="path-step">08</span></div>
+      <div class="path-item"><img src="path_09.webp" alt="오시는길 9" loading="lazy"><span class="path-step">09</span></div>
     </div>
   </div>
 </section>
@@ -786,6 +892,39 @@
 </footer>
 
 <script>
+
+
+  // Hero Slideshow
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsContainer = document.getElementById('heroDots');
+  let current = 0;
+  let timer;
+
+  // 도트 생성
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    resetTimer();
+  }
+
+  function heroSlide(dir) { goTo(current + dir); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  resetTimer();
 
   function switchTab(tabId) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
