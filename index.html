@@ -733,39 +733,40 @@
     /* ── 모바일 하단 탭바 ── */
     .mobile-tab-bar {
       display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      top: unset !important;
+      z-index: 200;
+      background: rgba(253,250,247,0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--blush);
+      border-bottom: none;
+      padding: 0.4rem 0 env(safe-area-inset-bottom, 0.4rem);
+      justify-content: stretch;
+      align-items: center;
+      width: 100%;
+      box-shadow: 0 -2px 12px rgba(44,36,32,0.06);
     }
+    .mobile-tab-bar a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      text-decoration: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      padding: 0.3rem 0;
+      transition: color 0.2s;
+    }
+    .mobile-tab-bar a.active,
+    .mobile-tab-bar a:hover { color: var(--deep-rose); }
+    .mobile-tab-bar a svg { width: 20px; height: 20px; stroke: currentColor; }
+    .mobile-tab-bar a.tab-reserve { color: var(--deep-rose); font-weight: 500; }
     @media (max-width: 768px) {
-      .mobile-tab-bar {
-        display: flex;
-        position: fixed;
-        bottom: 0; left: 0; right: 0;
-        z-index: 200;
-        background: rgba(253,250,247,0.97);
-        backdrop-filter: blur(12px);
-        border-top: 1px solid var(--blush);
-        padding: 0.5rem 0 env(safe-area-inset-bottom, 0.5rem);
-      }
-      .mobile-tab-bar a {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.25rem;
-        text-decoration: none;
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 0.62rem;
-        color: var(--muted);
-        letter-spacing: 0.02em;
-        padding: 0.3rem 0;
-        transition: color 0.2s;
-      }
-      .mobile-tab-bar a.active,
-      .mobile-tab-bar a:hover { color: var(--deep-rose); }
-      .mobile-tab-bar a svg { width: 20px; height: 20px; }
-      .mobile-tab-bar a.tab-reserve {
-        color: var(--deep-rose);
-        font-weight: 500;
-      }
+      .mobile-tab-bar { display: flex; }
     }
 
     @media (max-width: 768px) {
@@ -902,28 +903,28 @@
 </nav>
 
 <!-- 모바일 하단 탭바 -->
-<nav class="mobile-tab-bar" id="mobileTabBar">
+<div class="mobile-tab-bar" id="mobileTabBar">
   <a href="#about" onclick="setActiveTab(this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     소개
   </a>
   <a href="#concept" onclick="setActiveTab(this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     컨셉
   </a>
   <a href="#costume" onclick="setActiveTab(this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H6L3 8v1h18V8l-3-5h-3l-3 3-3-3z"/><rect x="3" y="9" width="18" height="12" rx="1"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 3H6L3 8v1h18V8l-3-5h-3l-3 3-3-3z"/><rect x="3" y="9" width="18" height="12" rx="1"/></svg>
     의상
   </a>
   <a href="#pricing" onclick="setActiveTab(this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v2m0 6v2m-2-6h3a1 1 0 110 2h-2a1 1 0 100 2h3"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v2m0 6v2m-2-6h3a1 1 0 110 2h-2a1 1 0 100 2h3"/></svg>
     가격
   </a>
   <a href="#reservation" class="tab-reserve" onclick="setActiveTab(this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
     예약
   </a>
-</nav>
+</div>
 
 <!-- HERO SLIDESHOW -->
 <section class="hero">
