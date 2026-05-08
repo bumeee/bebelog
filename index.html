@@ -19,7 +19,7 @@
       --light-muted: #c4b8b2;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 17px; }
     body {
       background: var(--warm-white);
       color: var(--charcoal);
@@ -225,11 +225,11 @@
       color: var(--charcoal); margin-bottom: 1.5rem;
     }
     .about-heading em { font-style: italic; color: var(--deep-rose); }
-    .about-body { font-family: 'Noto Serif KR', serif; font-size: 0.95rem; line-height: 2.1; color: var(--muted); }
+    .about-body { font-family: 'Noto Serif KR', serif; font-size: 0.97rem; line-height: 2.2; color: var(--charcoal); opacity: 0.85; }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     .stat-item { border-top: 1px solid var(--blush); padding-top: 1.5rem; }
     .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--deep-rose); line-height: 1; margin-bottom: 0.5rem; }
-    .stat-label { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted); }
+    .stat-label { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--charcoal); opacity: 0.75; }
 
     /* ── CONCEPT PHOTOZONE ── */
     .concept-section {
@@ -283,11 +283,12 @@
     .concept-main-img {
       overflow: hidden;
       border-radius: 2px;
+      background: var(--cream);
     }
     .concept-main-img img {
       width: 100%;
       aspect-ratio: 3/4;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       transition: transform 0.5s;
     }
@@ -295,18 +296,40 @@
     .concept-babies {
       overflow: hidden;
       border-radius: 2px;
+      background: var(--cream);
     }
     .concept-babies img {
       width: 100%;
       aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: center top;
+      object-fit: contain;
       display: block;
       transition: transform 0.5s;
     }
     .concept-babies:hover img { transform: scale(1.02); }
 
-    .concept-all {
+    .fullview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .fullview-item {
+      overflow: hidden;
+      border-radius: 2px;
+      background: var(--cream);
+    }
+    .fullview-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.5s;
+    }
+    .fullview-item:hover img { transform: scale(1.02); }
+    @media (max-width: 768px) {
+      .fullview-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CONCEPT ALL ── */
       margin-top: 3rem;
       text-align: center;
     }
@@ -392,11 +415,11 @@
     .pricing-sub { font-size: 0.85rem; letter-spacing: 0.05em; color: var(--muted); }
     .base-pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--blush); margin-bottom: 2rem; }
     .base-card { background: var(--warm-white); padding: 3rem; }
-    .base-card-tag { font-size: 0.65rem; letter-spacing: 0.3em; color: var(--rose); text-transform: uppercase; margin-bottom: 1.5rem; }
-    .base-card-type { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); margin-bottom: 0.5rem; }
-    .base-card-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--deep-rose); line-height: 1; margin-bottom: 0.4rem; }
-    .base-card-price span { font-family: 'Noto Sans KR', sans-serif; font-size: 0.85rem; color: var(--muted); }
-    .base-card-note { font-size: 0.82rem; color: var(--muted); line-height: 1.8; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--blush); }
+    .base-card-tag { font-size: 0.68rem; letter-spacing: 0.3em; color: var(--rose); text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 600; }
+    .base-card-type { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.5rem; }
+    .base-card-price { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 400; color: var(--deep-rose); line-height: 1; margin-bottom: 0.4rem; }
+    .base-card-price span { font-family: 'Noto Sans KR', sans-serif; font-size: 0.9rem; color: var(--charcoal); font-weight: 500; }
+    .base-card-note { font-size: 0.88rem; color: var(--charcoal); line-height: 2; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--blush); font-weight: 400; }
     .options-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--charcoal); margin-bottom: 1.2rem; margin-top: 3.5rem; }
     .options-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--blush); }
     .option-card { background: var(--warm-white); padding: 2rem 1.8rem; transition: background 0.3s; }
@@ -417,8 +440,8 @@
     .option-card:hover .option-img img { transform: scale(1.05); }
 
     .option-icon { font-size: 1.5rem; margin-bottom: 1rem; }
-    .option-name { font-family: 'Noto Serif KR', serif; font-size: 0.92rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.5rem; line-height: 1.6; }
-    .option-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .option-name { font-family: 'Noto Serif KR', serif; font-size: 1rem; font-weight: 500; color: var(--charcoal); margin-bottom: 0.5rem; line-height: 1.6; }
+    .option-desc { font-size: 0.85rem; color: var(--charcoal); line-height: 1.7; margin-bottom: 1rem; opacity: 0.75; }
     .option-price { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--deep-rose); }
     .option-spec {
       font-size: 0.72rem;
@@ -790,12 +813,16 @@
       <p class="section-tag">About Studio</p>
       <h2 class="about-heading">단 한 번뿐인<br><em>첫 생일</em>의<br>기억</h2>
       <p class="about-body">
-        베베로그는 아이의 백일과 돌을 위한<br>
-        화성 프리미엄 셀프스튜디오입니다.<br><br>
-        드레스샵 수준의 의상을 직접 골라 입히고,<br>
-        스튜디오 공간 전체를 우리 가족만 단독으로 사용해<br>
-        눈치 없이 마음껏 찍을 수 있어요.<br><br>
-        <span style="font-size:0.85rem;color:var(--light-muted);">※ 셀프 촬영 스튜디오로, 별도 스태프 배치는 없습니다.</span>
+        <strong style="font-size:1.05rem;color:var(--charcoal);font-weight:500;">준비는 최소로, 만족은 최대로.</strong><br><br>
+        상차림 세팅 · 5가지 포토존 · 드레스 / 수트 / 한복 대여까지<br>
+        모든 게 갖춰진 단독 대관 베이비 셀프스튜디오입니다.<br>
+        여러분은 아이와의 시간만 즐기시면 됩니다 :)<br><br>
+        <span style="font-size:0.88rem;color:var(--charcoal);line-height:2.2;display:block;">
+          ※ 백일 · 돌 · 두돌 전문&nbsp;&nbsp;
+          ※ 단독 대관&nbsp;&nbsp;
+          ※ 의상 대여&nbsp;&nbsp;
+          ※ 수유실 완비
+        </span>
       </p>
     </div>
     <div class="about-stats reveal">
@@ -823,6 +850,7 @@
       <button class="concept-tab-btn" onclick="switchConcept(2, this)">컨셉 3</button>
       <button class="concept-tab-btn" onclick="switchConcept(3, this)">컨셉 4</button>
       <button class="concept-tab-btn" onclick="switchConcept(4, this)">컨셉 5</button>
+      <button class="concept-tab-btn" onclick="switchConcept(5, this)">스튜디오 전경</button>
     </div>
 
     <!-- 컨셉 패널 -->
@@ -880,6 +908,15 @@
           <div class="concept-babies">
             <img src="concept_baby_5.webp" alt="컨셉5 촬영 예시" loading="lazy">
           </div>
+        </div>
+      </div>
+      <!-- 스튜디오 전경 -->
+      <div class="concept-panel" id="concept-5">
+        <div class="fullview-grid">
+          <div class="fullview-item"><img src="Full_view_1.webp" alt="스튜디오 전경 1" loading="lazy"></div>
+          <div class="fullview-item"><img src="Full_view_2.webp" alt="스튜디오 전경 2" loading="lazy"></div>
+          <div class="fullview-item"><img src="Full_view_3.webp" alt="스튜디오 전경 3" loading="lazy"></div>
+          <div class="fullview-item"><img src="Full_view_4.webp" alt="스튜디오 전경 4" loading="lazy"></div>
         </div>
       </div>
     </div>
