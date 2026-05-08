@@ -229,6 +229,105 @@
     .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--deep-rose); line-height: 1; margin-bottom: 0.5rem; }
     .stat-label { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted); }
 
+    /* ── CONCEPT PHOTOZONE ── */
+    .concept-section {
+      background: var(--warm-white);
+      padding: 6rem;
+    }
+    .concept-inner { max-width: 1200px; margin: 0 auto; }
+    .concept-header { margin-bottom: 2.5rem; }
+    .concept-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--charcoal); margin-bottom: 0.5rem;
+    }
+    .concept-title em { font-style: italic; color: var(--deep-rose); }
+    .concept-sub { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.04em; }
+
+    .concept-tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--blush);
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    .concept-tab-btn {
+      background: none; border: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.9rem; font-weight: 400;
+      color: var(--muted);
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+    .concept-tab-btn:hover { color: var(--deep-rose); }
+    .concept-tab-btn.active {
+      color: var(--charcoal);
+      border-bottom-color: var(--deep-rose);
+      font-weight: 500;
+    }
+
+    .concept-panel { display: none; }
+    .concept-panel.active { display: block; }
+    .concept-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .concept-main-img {
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .concept-main-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4/3;
+      transition: transform 0.5s;
+    }
+    .concept-main-img:hover img { transform: scale(1.02); }
+    .concept-babies {
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .concept-babies img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      transition: transform 0.5s;
+    }
+    .concept-babies:hover img { transform: scale(1.02); }
+
+    .concept-all {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .concept-all-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--rose);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .concept-all img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      .concept-section { padding: 3rem 1.5rem; }
+      .concept-layout { grid-template-columns: 1fr; }
+      .concept-tab-btn { padding: 0.7rem 1.2rem; font-size: 0.82rem; }
+    }
+
     /* ── COSTUME ── */
     .costume { background: var(--charcoal); padding: 6rem; color: var(--cream); }
     .costume-inner { max-width: 1200px; margin: 0 auto; }
@@ -318,6 +417,16 @@
     .option-name { font-family: 'Noto Serif KR', serif; font-size: 0.92rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.5rem; line-height: 1.6; }
     .option-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
     .option-price { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--deep-rose); }
+    .option-spec {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      letter-spacing: 0.03em;
+      border-left: 2px solid var(--rose);
+      padding-left: 0.6rem;
+    }
 
     /* ── EVENTS ── */
     .events { padding: 6rem; max-width: 1100px; margin: 0 auto; }
@@ -628,6 +737,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#about">스튜디오 소개</a></li>
+    <li><a href="#concept">포토존 컨셉</a></li>
     <li><a href="#costume">프리미엄 의상</a></li>
     <li><a href="#pricing">가격 안내</a></li>
     <li><a href="#map">오시는 길</a></li>
@@ -690,6 +800,91 @@
       <div class="stat-item"><div class="stat-number">2h</div><div class="stat-label">여유로운 촬영 시간</div></div>
       <div class="stat-item"><div class="stat-number">1:1</div><div class="stat-label">단독 스튜디오 사용</div></div>
       <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">원본 사진 전체 제공<br><span style="font-size:0.7rem;color:var(--light-muted);">(카메라 대여 시)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT PHOTOZONE -->
+<section class="concept-section" id="concept">
+  <div class="concept-inner">
+    <div class="concept-header reveal">
+      <p class="section-tag">Photo Zone</p>
+      <h2 class="concept-title">5가지 <em>포토존 컨셉</em></h2>
+      <p class="concept-sub">촬영 당일 모든 포토존을 자유롭게 이용하실 수 있어요</p>
+    </div>
+
+    <!-- 컨셉 탭 버튼 -->
+    <div class="concept-tabs reveal">
+      <button class="concept-tab-btn active" onclick="switchConcept(0, this)">컨셉 1</button>
+      <button class="concept-tab-btn" onclick="switchConcept(1, this)">컨셉 2</button>
+      <button class="concept-tab-btn" onclick="switchConcept(2, this)">컨셉 3</button>
+      <button class="concept-tab-btn" onclick="switchConcept(3, this)">컨셉 4</button>
+      <button class="concept-tab-btn" onclick="switchConcept(4, this)">컨셉 5</button>
+    </div>
+
+    <!-- 컨셉 패널 -->
+    <div class="concept-panels reveal">
+      <!-- 컨셉 1 -->
+      <div class="concept-panel active" id="concept-0">
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="concept_1.webp" alt="포토존 컨셉 1" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="concept_baby_1.webp" alt="컨셉1 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <!-- 컨셉 2 -->
+      <div class="concept-panel" id="concept-1">
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="concept_2.webp" alt="포토존 컨셉 2" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="concept_baby_2.webp" alt="컨셉2 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <!-- 컨셉 3 -->
+      <div class="concept-panel" id="concept-2">
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="concept_3.webp" alt="포토존 컨셉 3" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="concept_baby_3.webp" alt="컨셉3 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <!-- 컨셉 4 -->
+      <div class="concept-panel" id="concept-3">
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="concept_4.webp" alt="포토존 컨셉 4" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="concept_baby_4.webp" alt="컨셉4 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <!-- 컨셉 5 -->
+      <div class="concept-panel" id="concept-4">
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="concept_5.webp" alt="포토존 컨셉 5" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="concept_baby_5.webp" alt="컨셉5 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 전체 한눈에 보기 -->
+    <div class="concept-all reveal">
+      <p class="concept-all-label">✦ 5가지 포토존 한눈에 보기</p>
+      <img src="concept_all.webp" alt="전체 포토존" loading="lazy">
     </div>
   </div>
 </section>
@@ -803,7 +998,7 @@
     <h3 class="options-title reveal">추가 옵션</h3>
     <div class="options-grid reveal">
       <div class="option-card">
-        <div class="option-icon">👗</div>
+        <div class="option-img"><img src="clothes_all.webp" alt="프리미엄 의상" loading="lazy"></div>
         <div class="option-name">프리미엄 의상 대여<br>(드레스 / 수트 전체)</div>
         <div class="option-desc">보유 의상 전체를 자유롭게 이용</div>
         <div class="option-price">35,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
@@ -815,9 +1010,10 @@
         <div class="option-price">20,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
       </div>
       <div class="option-card">
-        <div class="option-icon">📷</div>
+        <div class="option-img"><img src="camera.webp" alt="카메라 대여" loading="lazy"></div>
         <div class="option-name">카메라 대여<br>+ 전체 컷 톤 보정</div>
         <div class="option-desc">전문 카메라 + 원본 전체 색감 보정</div>
+        <div class="option-spec">SONY ZV-E10 4K<br>+ 시그마 23mm F1.4 렌즈</div>
         <div class="option-price">30,000<span style="font-family:'Noto Sans KR';font-size:0.75rem;color:var(--muted);">원</span></div>
       </div>
       <div class="option-card">
@@ -1033,6 +1229,13 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
     event.target.classList.add('active');
+  }
+
+  function switchConcept(idx, btn) {
+    document.querySelectorAll('.concept-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.concept-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('concept-' + idx).classList.add('active');
+    btn.classList.add('active');
   }
 
   const reveals = document.querySelectorAll('.reveal');
