@@ -47,7 +47,7 @@
       align-items: center;
     }
     .nav-logo img {
-      height: 48px;
+      height: 64px;
       width: auto;
     }
     .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
@@ -87,10 +87,18 @@
       position: absolute; inset: 0;
       opacity: 0;
       transition: opacity 1s ease;
+      background: #1a1210;
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide img {
       width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      background: #1a1210;
+    }
+    /* 가로형 이미지는 cover로, 세로형은 contain으로 처리하기 위해
+       각 슬라이드에 data 속성 활용 */
+    .hero-slide[data-fit="cover"] img {
       object-fit: cover;
       object-position: center top;
     }
@@ -248,7 +256,7 @@
       transition: transform 0.4s;
     }
     .costume-item:hover { transform: scale(1.015); z-index: 2; }
-    .costume-item:first-child { grid-row: span 2; }
+    .costume-gallery .costume-item:first-child { grid-row: span 2; }
     .costume-item img {
       position: absolute; top: 0; left: 0;
       width: 100%; height: 100%; object-fit: cover;
@@ -407,6 +415,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
+      grid-auto-flow: dense;
     }
     .costume-grid .costume-item {
       position: relative;
@@ -457,6 +466,9 @@
       color: var(--charcoal);
       margin-bottom: 1.2rem;
     }
+    .path-slider-wrap {
+      position: relative;
+    }
     .path-scroll {
       display: flex;
       gap: 10px;
@@ -464,6 +476,7 @@
       padding-bottom: 1rem;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
     }
     .path-scroll::-webkit-scrollbar { height: 4px; }
     .path-scroll::-webkit-scrollbar-track { background: var(--blush); }
@@ -471,15 +484,30 @@
     .path-item {
       position: relative;
       flex-shrink: 0;
-      width: 200px;
+      width: 240px;
       scroll-snap-align: start;
+      cursor: pointer;
     }
     .path-item img {
       width: 100%;
-      height: 260px;
+      height: 300px;
       object-fit: cover;
       border: 1px solid var(--blush);
+      transition: opacity 0.2s;
+      display: block;
     }
+    .path-item:hover img { opacity: 0.85; }
+    .path-item::after {
+      content: '🔍';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .path-item:hover::after { opacity: 1; }
     .path-step {
       position: absolute;
       top: 0.5rem; left: 0.5rem;
@@ -490,10 +518,72 @@
       letter-spacing: 0.1em;
       padding: 0.2rem 0.5rem;
     }
+    .path-slider-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-60%);
+      background: var(--charcoal);
+      color: var(--cream);
+      border: none; cursor: pointer;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.8;
+      transition: opacity 0.2s, background 0.2s;
+      z-index: 5;
+    }
+    .path-slider-btn:hover { opacity: 1; background: var(--deep-rose); }
+    .path-slider-btn.path-prev { left: -18px; }
+    .path-slider-btn.path-next { right: -18px; }
+
+    /* LIGHTBOX */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: #fff;
+      font-size: 2rem; cursor: pointer; line-height: 1; opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; width: 52px; height: 52px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.3rem; transition: background 0.2s;
+    }
+    .lightbox-arrow:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-arrow.lb-prev { left: 1.5rem; }
+    .lightbox-arrow.lb-next { right: 1.5rem; }
+    .lightbox-counter {
+      color: rgba(255,255,255,0.6); font-size: 0.8rem;
+      margin-top: 1rem; letter-spacing: 0.1em;
+    }
     @media (max-width: 768px) {
       .path-guide { padding: 0 1.5rem; margin-top: 2rem; }
-      .path-item { width: 160px; }
-      .path-item img { height: 200px; }
+      .path-item { width: 180px; }
+      .path-item img { height: 220px; }
+      .path-slider-btn { display: none; }
     }
 
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -536,7 +626,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <img src="logo.png" alt="베베로그 로고">
+    <img src="logo_eng.png" alt="베베로그 로고">
   </a>
   <ul class="nav-links">
     <li><a href="#about">스튜디오 소개</a></li>
@@ -550,13 +640,13 @@
 <!-- HERO SLIDESHOW -->
 <section class="hero">
   <div class="hero-slides">
-    <div class="hero-slide active"><img src="main_6.webp" alt="베베로그 스튜디오" loading="eager"></div>
-    <div class="hero-slide"><img src="main_7.webp" alt="베베로그 스튜디오" loading="lazy"></div>
-    <div class="hero-slide"><img src="main_1.webp" alt="베베로그 스튜디오" loading="lazy"></div>
-    <div class="hero-slide"><img src="main_2.webp" alt="베베로그 스튜디오" loading="lazy"></div>
-    <div class="hero-slide"><img src="main_3.webp" alt="베베로그 스튜디오" loading="lazy"></div>
-    <div class="hero-slide"><img src="main_4.webp" alt="베베로그 스튜디오" loading="lazy"></div>
-    <div class="hero-slide"><img src="main_5.webp" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide active" data-fit="cover"><img src="main_1.jpg" alt="베베로그 스튜디오" loading="eager"></div>
+    <div class="hero-slide" data-fit="cover"><img src="main_2.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_6.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_7.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_3.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_4.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
+    <div class="hero-slide"><img src="main_5.jpg" alt="베베로그 스튜디오" loading="lazy"></div>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -852,17 +942,32 @@
   <!-- 오시는길 사진 가이드 -->
   <div class="path-guide reveal">
     <h3 class="path-guide-title">📸 이렇게 오세요</h3>
-    <div class="path-scroll">
-      <div class="path-item"><img src="path_01.webp" alt="오시는길 1" loading="lazy"><span class="path-step">01</span></div>
-      <div class="path-item"><img src="path_02.webp" alt="오시는길 2" loading="lazy"><span class="path-step">02</span></div>
-      <div class="path-item"><img src="path_03.webp" alt="오시는길 3" loading="lazy"><span class="path-step">03</span></div>
-      <div class="path-item"><img src="path_04.webp" alt="오시는길 4" loading="lazy"><span class="path-step">04</span></div>
-      <div class="path-item"><img src="path_05.webp" alt="오시는길 5" loading="lazy"><span class="path-step">05</span></div>
-      <div class="path-item"><img src="path_06.webp" alt="오시는길 6" loading="lazy"><span class="path-step">06</span></div>
-      <div class="path-item"><img src="path_07.webp" alt="오시는길 7" loading="lazy"><span class="path-step">07</span></div>
-      <div class="path-item"><img src="path_08.webp" alt="오시는길 8" loading="lazy"><span class="path-step">08</span></div>
-      <div class="path-item"><img src="path_09.webp" alt="오시는길 9" loading="lazy"><span class="path-step">09</span></div>
+    <div class="path-slider-wrap">
+      <button class="path-slider-btn path-prev" onclick="pathSlide(-1)">&#8592;</button>
+      <div class="path-scroll" id="pathScroll">
+        <div class="path-item" onclick="openLightbox(0)"><img src="path_01.webp" alt="오시는길 1" loading="lazy"><span class="path-step">01</span></div>
+        <div class="path-item" onclick="openLightbox(1)"><img src="path_02.webp" alt="오시는길 2" loading="lazy"><span class="path-step">02</span></div>
+        <div class="path-item" onclick="openLightbox(2)"><img src="path_03.webp" alt="오시는길 3" loading="lazy"><span class="path-step">03</span></div>
+        <div class="path-item" onclick="openLightbox(3)"><img src="path_04.webp" alt="오시는길 4" loading="lazy"><span class="path-step">04</span></div>
+        <div class="path-item" onclick="openLightbox(4)"><img src="path_05.webp" alt="오시는길 5" loading="lazy"><span class="path-step">05</span></div>
+        <div class="path-item" onclick="openLightbox(5)"><img src="path_06.webp" alt="오시는길 6" loading="lazy"><span class="path-step">06</span></div>
+        <div class="path-item" onclick="openLightbox(6)"><img src="path_07.webp" alt="오시는길 7" loading="lazy"><span class="path-step">07</span></div>
+        <div class="path-item" onclick="openLightbox(7)"><img src="path_08.webp" alt="오시는길 8" loading="lazy"><span class="path-step">08</span></div>
+        <div class="path-item" onclick="openLightbox(8)"><img src="path_09.webp" alt="오시는길 9" loading="lazy"><span class="path-step">09</span></div>
+      </div>
+      <button class="path-slider-btn path-next" onclick="pathSlide(1)">&#8594;</button>
     </div>
+  </div>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-arrow lb-prev" onclick="lbSlide(-1)">&#8592;</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="오시는길">
+    </div>
+    <button class="lightbox-arrow lb-next" onclick="lbSlide(1)">&#8594;</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 </section>
 
@@ -879,7 +984,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="logo.png" alt="베베로그" style="height:44px;width:auto;filter:brightness(0) invert(1);"></div>
+  <div class="footer-logo"><img src="logo_eng.png" alt="베베로그" style="height:60px;width:auto;filter:brightness(0) invert(1);"></div>
   <div class="footer-info">
     베베로그 셀프스튜디오<br>
     경기도 화성시 · 영업시간 10:00 – 18:00 · 월요일 휴무
@@ -940,6 +1045,48 @@
     });
   }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
+
+  // Path 슬라이더 버튼
+  function pathSlide(dir) {
+    const scroll = document.getElementById('pathScroll');
+    scroll.scrollBy({ left: dir * 260, behavior: 'smooth' });
+  }
+
+  // 라이트박스
+  const pathSrcs = [
+    'path_01.webp','path_02.webp','path_03.webp','path_04.webp','path_05.webp',
+    'path_06.webp','path_07.webp','path_08.webp','path_09.webp'
+  ];
+  let lbIndex = 0;
+
+  function openLightbox(idx) {
+    lbIndex = idx;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxOnBg(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+  function lbSlide(dir) {
+    lbIndex = (lbIndex + dir + pathSrcs.length) % pathSrcs.length;
+    updateLightbox();
+  }
+  function updateLightbox() {
+    document.getElementById('lightboxImg').src = pathSrcs[lbIndex];
+    document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + pathSrcs.length;
+  }
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') lbSlide(-1);
+    if (e.key === 'ArrowRight') lbSlide(1);
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 </body>
 </html>
