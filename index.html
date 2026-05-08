@@ -79,6 +79,7 @@
       position: relative;
       min-height: 100vh;
       overflow: hidden;
+      background: var(--cream);
     }
     .hero-slides {
       position: absolute; inset: 0;
@@ -87,30 +88,20 @@
       position: absolute; inset: 0;
       opacity: 0;
       transition: opacity 1s ease;
-      background: #1a1210;
+      background: var(--cream);
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide img {
       width: 100%; height: 100%;
       object-fit: contain;
       object-position: center center;
-      background: #1a1210;
     }
-    /* 가로형 이미지는 cover로, 세로형은 contain으로 처리하기 위해
-       각 슬라이드에 data 속성 활용 */
     .hero-slide[data-fit="cover"] img {
-      object-fit: cover;
-      object-position: center top;
+      object-fit: contain;
+      object-position: center center;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(30,20,15,0.62) 0%,
-        rgba(30,20,15,0.35) 50%,
-        rgba(30,20,15,0.1) 100%
-      );
-    }
+    /* 오버레이 제거 */
+    .hero-overlay { display: none; }
     .hero-content {
       position: relative;
       z-index: 2;
@@ -118,37 +109,48 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 8rem 8rem 4rem;
-      max-width: 680px;
+      padding: 8rem 4rem 4rem;
+      max-width: 480px;
     }
     .hero-eyebrow {
       font-size: 0.72rem;
       letter-spacing: 0.35em;
-      color: rgba(232,213,200,0.85);
+      color: var(--deep-rose);
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.2s forwards;
     }
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 5vw, 5rem);
-      font-weight: 300;
-      line-height: 1.15;
-      color: #fff;
-      margin-bottom: 1.2rem;
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(1.6rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.4s forwards;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      text-shadow: none;
+      white-space: nowrap;
     }
-    .hero-title em { font-style: italic; color: var(--rose); }
+    .hero-title em { font-style: italic; color: var(--deep-rose); font-family: 'Cormorant Garamond', serif; font-size: 1.1em; }
+    .hero-title-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+      letter-spacing: 0.05em;
+    }
     .hero-subtitle {
       font-family: 'Noto Serif KR', serif;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 300;
       line-height: 2;
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 3rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
       opacity: 0;
       animation: fadeUp 0.8s 0.6s forwards;
     }
@@ -160,10 +162,10 @@
       opacity: 0;
       animation: fadeUp 0.8s 0.8s forwards;
     }
-    .hero-cta-text { font-size: 0.88rem; font-weight: 400; letter-spacing: 0.2em; color: #fff; }
+    .hero-cta-text { font-size: 0.88rem; font-weight: 400; letter-spacing: 0.2em; color: var(--charcoal); }
     .hero-cta-line { width: 48px; height: 1px; background: var(--rose); transition: width 0.4s; }
     .hero-cta:hover .hero-cta-line { width: 80px; }
-    .hero-cta:hover .hero-cta-text { color: var(--rose); }
+    .hero-cta:hover .hero-cta-text { color: var(--deep-rose); }
 
     /* 화살표 */
     .hero-arrow {
@@ -299,13 +301,15 @@
     .option-card:hover { background: var(--cream); }
 
     .option-img {
-      width: 100%; height: 140px;
+      width: 100%;
+      aspect-ratio: 4/3;
       overflow: hidden;
       margin-bottom: 1rem;
     }
     .option-img img {
       width: 100%; height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: var(--cream);
       transition: transform 0.4s;
     }
     .option-card:hover .option-img img { transform: scale(1.05); }
@@ -435,14 +439,7 @@
     }
     .costume-grid .costume-item:hover img { opacity:1; }
     .costume-grid .costume-label {
-      position: relative; z-index: 1;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      color: var(--cream);
-      background: rgba(44,36,32,0.72);
-      padding: 0.25rem 0.6rem;
-      backdrop-filter: blur(4px);
+      display: none;
     }
     @media (max-width: 768px) {
       .tab-buttons { overflow-x: auto; }
@@ -594,7 +591,8 @@
     @media (max-width: 768px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { display: none; }
-      .hero-content { padding: 7rem 1.5rem 4rem; }
+      .hero-content { padding: 5rem 1.5rem 2rem; max-width: 100%; }
+      .hero-title { white-space: normal; font-size: clamp(1.4rem, 6vw, 2rem); }
       .hero-arrow { width: 36px; height: 36px; font-size: 0.9rem; }
       .about { padding: 3rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -651,9 +649,8 @@
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Hwaseong · Premium Self Studio</p>
-    <h1 class="hero-title">
-      아이의 가장<br><em>빛나는 순간</em>을<br>직접 담으세요
-    </h1>
+    <h1 class="hero-title">공간대여 &amp; 셀프 촬영<br><em>베이비 스튜디오</em></h1>
+    <p class="hero-title-sub">베베로그 스튜디오</p>
     <p class="hero-subtitle">
       프리미엄 의상과 아름다운 공간에서<br>
       오롯이 우리 가족만의 시간으로
@@ -689,10 +686,10 @@
       </p>
     </div>
     <div class="about-stats reveal">
-      <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">프리미엄 의상 보유</div></div>
+      <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">프리미엄 의상 보유</div></div>
       <div class="stat-item"><div class="stat-number">2h</div><div class="stat-label">여유로운 촬영 시간</div></div>
       <div class="stat-item"><div class="stat-number">1:1</div><div class="stat-label">단독 스튜디오 사용</div></div>
-      <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">원본 사진 전체 제공</div></div>
+      <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">원본 사진 전체 제공<br><span style="font-size:0.7rem;color:var(--light-muted);">(카메라 대여 시)</span></div></div>
     </div>
   </div>
 </section>
@@ -919,7 +916,7 @@
         <div class="map-info-icon">🕐</div>
         <div>
           <div class="map-info-label">영업시간</div>
-          <div class="map-info-text">평일 10:00 – 18:00<br>주말 10:00 – 18:00<br><span style="font-size:0.78rem;color:var(--muted);">월요일 휴무</span></div>
+          <div class="map-info-text">매일 08:00 – 22:00<br><span style="font-size:0.78rem;color:var(--muted);">연중무휴</span></div>
         </div>
       </div>
       <div class="map-info-item">
@@ -987,7 +984,7 @@
   <div class="footer-logo"><img src="logo_eng.png" alt="베베로그" style="height:60px;width:auto;filter:brightness(0) invert(1);"></div>
   <div class="footer-info">
     베베로그 셀프스튜디오<br>
-    경기도 화성시 · 영업시간 10:00 – 18:00 · 월요일 휴무
+    경기도 화성시 · 매일 08:00 – 22:00 · 연중무휴
   </div>
   <div class="footer-links">
     <a href="#">인스타그램</a>
