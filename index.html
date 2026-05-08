@@ -172,20 +172,22 @@
       position: absolute;
       top: 50%; transform: translateY(-50%);
       z-index: 10;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      width: 48px; height: 48px;
-      border-radius: 50%;
+      background: none;
+      border: none;
+      color: var(--charcoal);
+      width: 44px; height: 44px;
+      border-radius: 0;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      font-size: 1.1rem;
-      transition: background 0.3s;
-      backdrop-filter: blur(4px);
+      font-size: 1.8rem;
+      font-weight: 300;
+      transition: opacity 0.2s, transform 0.2s;
+      text-shadow: 0 1px 6px rgba(255,255,255,0.6);
+      opacity: 0.7;
     }
-    .hero-arrow:hover { background: rgba(255,255,255,0.3); }
-    .hero-arrow.prev { left: 1.5rem; }
-    .hero-arrow.next { right: 1.5rem; }
+    .hero-arrow:hover { opacity: 1; transform: translateY(-50%) scale(1.15); }
+    .hero-arrow.prev { left: 1.2rem; }
+    .hero-arrow.next { right: 1.2rem; }
 
     /* 도트 */
     .hero-dots {
@@ -283,10 +285,10 @@
       border-radius: 2px;
     }
     .concept-main-img img {
-      width: 100%; height: 100%;
+      width: 100%;
+      aspect-ratio: 3/4;
       object-fit: cover;
       display: block;
-      aspect-ratio: 4/3;
       transition: transform 0.5s;
     }
     .concept-main-img:hover img { transform: scale(1.02); }
@@ -296,9 +298,10 @@
     }
     .concept-babies img {
       width: 100%;
-      display: block;
+      aspect-ratio: 3/4;
       object-fit: cover;
-      aspect-ratio: 1/1;
+      object-position: center top;
+      display: block;
       transition: transform 0.5s;
     }
     .concept-babies:hover img { transform: scale(1.02); }
@@ -912,16 +915,16 @@
 
     <div class="tab-panel active" id="tab-dress-girl">
       <div class="costume-grid">
-        <div class="costume-item"><img src="dress5_1.webp" alt="세이지 그린 드레스" loading="lazy"><span class="costume-label">Sage Green</span></div>
-        <div class="costume-item"><img src="dress5_2.webp" alt="" loading="lazy"><span class="costume-label">Sage Green · Side</span></div>
-        <div class="costume-item"><img src="dress1_1.webp" alt="화이트 플라워 드레스" loading="lazy"><span class="costume-label">White Flower</span></div>
-        <div class="costume-item"><img src="dress1_2.webp" alt="" loading="lazy"><span class="costume-label">White Flower · Detail</span></div>
-        <div class="costume-item"><img src="dress2_1.webp" alt="블랙 드레스" loading="lazy"><span class="costume-label">Black</span></div>
-        <div class="costume-item"><img src="dress2_2.webp" alt="" loading="lazy"><span class="costume-label">Black · Detail</span></div>
-        <div class="costume-item"><img src="dress3_1.webp" alt="아이보리 케이프 드레스" loading="lazy"><span class="costume-label">Ivory Cape</span></div>
-        <div class="costume-item"><img src="dress3_2.webp" alt="" loading="lazy"><span class="costume-label">Ivory Cape · Detail</span></div>
-        <div class="costume-item"><img src="dress4_1.webp" alt="핑크 튤 드레스" loading="lazy"><span class="costume-label">Pink Tulle</span></div>
-        <div class="costume-item"><img src="dress4_2.webp" alt="" loading="lazy"><span class="costume-label">Pink Tulle · Detail</span></div>
+        <div class="costume-item"><img src="dress1_1.webp" alt="" loading="lazy"><span class="costume-label">dress1</span></div>
+        <div class="costume-item"><img src="dress1_2.webp" alt="" loading="lazy"><span class="costume-label">dress1 detail</span></div>
+        <div class="costume-item"><img src="dress3_1.webp" alt="" loading="lazy"><span class="costume-label">dress3</span></div>
+        <div class="costume-item"><img src="dress3_2.webp" alt="" loading="lazy"><span class="costume-label">dress3 detail</span></div>
+        <div class="costume-item"><img src="dress2_1.webp" alt="" loading="lazy"><span class="costume-label">dress2</span></div>
+        <div class="costume-item"><img src="dress2_2.webp" alt="" loading="lazy"><span class="costume-label">dress2 detail</span></div>
+        <div class="costume-item"><img src="dress4_1.webp" alt="" loading="lazy"><span class="costume-label">dress4</span></div>
+        <div class="costume-item"><img src="dress4_2.webp" alt="" loading="lazy"><span class="costume-label">dress4 detail</span></div>
+        <div class="costume-item"><img src="dress5_1.webp" alt="" loading="lazy"><span class="costume-label">dress5</span></div>
+        <div class="costume-item"><img src="dress5_2.webp" alt="" loading="lazy"><span class="costume-label">dress5 detail</span></div>
       </div>
     </div>
 
@@ -946,13 +949,14 @@
         <div class="costume-item"><img src="suit_1.webp" alt="" loading="lazy"><span class="costume-label">블랙 트위드 수트</span></div>
         <div class="costume-item"><img src="suit_2_1.webp" alt="" loading="lazy"><span class="costume-label">블랙 코듀로이 수트</span></div>
         <div class="costume-item"><img src="suit_3_1.webp" alt="" loading="lazy"><span class="costume-label">블랙 재킷 수트</span></div>
-        <div class="costume-item"><img src="suit_3_2.webp" alt="" loading="lazy"><span class="costume-label">블랙 재킷 · Detail</span></div>
         <div class="costume-item"><img src="suit_4_1.webp" alt="" loading="lazy"><span class="costume-label">베이지 오버롤</span></div>
         <div class="costume-item"><img src="suit_6_1.webp" alt="" loading="lazy"><span class="costume-label">그레이 핀스트라이프</span></div>
         <div class="costume-item"><img src="suit_7_1.webp" alt="" loading="lazy"><span class="costume-label">그레이 베스트 수트</span></div>
         <div class="costume-item"><img src="suit_8_1.webp" alt="" loading="lazy"><span class="costume-label">블랙 트위드 베스트</span></div>
-        <div class="costume-item"><img src="suit_8_2.webp" alt="" loading="lazy"><span class="costume-label">블랙 트위드 · Detail</span></div>
         <div class="costume-item"><img src="suit_9.webp" alt="" loading="lazy"><span class="costume-label">체크 롬퍼 수트</span></div>
+        <div class="costume-item"><img src="suit_new_1.webp" alt="" loading="lazy"><span class="costume-label">신규 수트 1</span></div>
+        <div class="costume-item"><img src="suit_new_2.webp" alt="" loading="lazy"><span class="costume-label">신규 수트 2</span></div>
+        <div class="costume-item"><img src="suit_new_3.webp" alt="" loading="lazy"><span class="costume-label">신규 수트 3</span></div>
       </div>
     </div>
 
@@ -1171,13 +1175,16 @@
   <p class="cta-sub reveal">주말과 공휴일은 빠르게 마감됩니다</p>
   <div class="cta-buttons reveal">
     <a href="https://map.naver.com/p/entry/place/2025048254" target="_blank" class="btn-primary">네이버 예약하기</a>
-    <a href="http://pf.kakao.com/_여기에카카오채널ID" target="_blank" class="btn-secondary">카카오 문의하기</a>
+    <a href="http://pf.kakao.com/_lYixkn" target="_blank" class="btn-secondary">카카오 문의하기</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><img src="logo_eng.png" alt="베베로그" style="height:60px;width:auto;filter:brightness(0) invert(1);"></div>
+  <div class="footer-logo" style="display:flex;align-items:center;gap:0.7rem;">
+    <img src="logo_eng.png" alt="베베로그" style="height:52px;width:auto;filter:brightness(0) invert(1);opacity:0.9;">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.2em;color:var(--cream);">Bebelog</span>
+  </div>
   <div class="footer-info">
     베베로그 셀프스튜디오<br>
     경기도 화성시 · 매일 08:00 – 22:00 · 연중무휴
@@ -1185,7 +1192,7 @@
   <div class="footer-links">
     <a href="#">인스타그램</a>
     <a href="https://map.naver.com/p/entry/place/2025048254" target="_blank">네이버 플레이스</a>
-    <a href="#">카카오 채널</a>
+    <a href="http://pf.kakao.com/_lYixkn" target="_blank">카카오 채널</a>
   </div>
 </footer>
 
