@@ -1032,6 +1032,62 @@
     .reveal { opacity:0; transform:translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity:1; transform:none; }
 
+    /* ── KAKAO FLOATING ── */
+    .kakao-float {
+      position: fixed;
+      right: 1.8rem;
+      bottom: 2.5rem;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.6rem;
+      animation: floatBob 3s ease-in-out infinite;
+    }
+    @keyframes floatBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .kakao-float-tooltip {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      font-size: 0.72rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(44,36,32,0.18);
+      position: relative;
+    }
+    .kakao-float-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -6px; right: 22px;
+      border: 6px solid transparent;
+      border-top-color: var(--charcoal);
+      border-bottom: 0;
+    }
+    .kakao-float-btn {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #FEE500;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(254,229,0,0.5), 0 2px 8px rgba(0,0,0,0.12);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kakao-float-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 28px rgba(254,229,0,0.6), 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .kakao-float-btn svg { width: 32px; height: 32px; }
+    @media (max-width: 768px) {
+      .kakao-float { right: 1rem; bottom: 5.5rem; }
+      .kakao-float-btn { width: 50px; height: 50px; }
+      .kakao-float-btn svg { width: 26px; height: 26px; }
+      .kakao-float-tooltip { font-size: 0.66rem; }
+    }
+
     /* ── 모바일 하단 탭바 ── */
     .mobile-tab-bar {
       display: none;
@@ -1887,6 +1943,19 @@
   </div>
 </section>
 
+<!-- 카카오 플로팅 버튼 -->
+<div class="kakao-float" id="kakaoFloat">
+  <div class="kakao-float-tooltip">💬 카카오로 바로 문의하기</div>
+  <a href="https://pf.kakao.com/_lYixkn/chat" target="_blank" class="kakao-float-btn" aria-label="카카오톡 문의">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3C6.477 3 2 6.582 2 11c0 2.709 1.573 5.096 3.99 6.596L5 21l3.703-2.013C9.744 19.3 10.855 19.5 12 19.5c5.523 0 10-3.582 10-8s-4.477-8.5-10-8.5z" fill="#3C1E1E"/>
+      <circle cx="8.5" cy="11" r="1.2" fill="#FEE500"/>
+      <circle cx="12" cy="11" r="1.2" fill="#FEE500"/>
+      <circle cx="15.5" cy="11" r="1.2" fill="#FEE500"/>
+    </svg>
+  </a>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
@@ -1924,6 +1993,17 @@
   });
   window.addEventListener('resize', adjustHeroHeight);
   setTimeout(adjustHeroHeight, 300);
+
+  // 카카오 플로팅 툴팁 - 5초 후 살짝 페이드, hover 시 다시 표시
+  const kakaoTooltip = document.querySelector('.kakao-float-tooltip');
+  const kakaoFloat = document.getElementById('kakaoFloat');
+  if (kakaoTooltip) {
+    setTimeout(() => { kakaoTooltip.style.opacity = '0'; kakaoTooltip.style.transition = 'opacity 0.5s'; }, 4000);
+    kakaoFloat.addEventListener('mouseenter', () => { kakaoTooltip.style.opacity = '1'; });
+    kakaoFloat.addEventListener('mouseleave', () => { kakaoTooltip.style.opacity = '0'; });
+    // 모바일 탭 시 다시 보이게
+    kakaoFloat.addEventListener('touchstart', () => { kakaoTooltip.style.opacity = '1'; setTimeout(() => { kakaoTooltip.style.opacity = '0'; }, 2000); });
+  }
 
   // 리뷰 슬라이더
   function reviewSlide(dir) {
