@@ -511,6 +511,129 @@
     .map-info-label { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--rose); text-transform: uppercase; margin-bottom: 0.4rem; }
     .map-info-text { font-family: 'Gowun Batang', serif; font-size: 0.9rem; color: var(--charcoal); line-height: 1.7; }
 
+    /* ── TERMS ── */
+    .terms-section {
+      background: var(--cream);
+      padding: 6rem;
+    }
+    .terms-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .terms-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .terms-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .terms-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    /* 아코디언 */
+    .terms-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--blush);
+      border: 1px solid var(--blush);
+    }
+    .terms-item {
+      background: var(--warm-white);
+    }
+    .terms-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.8rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .terms-trigger:hover { background: var(--cream); }
+    .terms-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .terms-emoji { font-size: 1rem; }
+    .terms-trigger-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
+    .terms-arrow {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .terms-item.open .terms-arrow { transform: rotate(180deg); }
+    .terms-body {
+      display: none;
+      padding: 0 1.8rem 1.5rem;
+      border-top: 1px solid var(--blush);
+    }
+    .terms-item.open .terms-body { display: block; }
+    .terms-list {
+      list-style: none;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .terms-list li {
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      line-height: 1.85;
+      padding-left: 1rem;
+      border-left: 2px solid var(--blush);
+    }
+    .terms-list li strong {
+      display: block;
+      color: var(--deep-rose);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      font-size: 0.88rem;
+    }
+    /* 환불 테이블 */
+    .refund-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+    }
+    .refund-table th {
+      background: var(--blush);
+      color: var(--charcoal);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      font-weight: 500;
+    }
+    .refund-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--blush);
+      color: var(--charcoal);
+    }
+    .refund-table tr:last-child td { border-bottom: none; }
+    .refund-table .highlight { color: var(--deep-rose); font-weight: 500; }
+    @media (max-width: 768px) {
+      .terms-section { padding: 2.5rem 1.2rem; }
+      .terms-trigger { padding: 1.1rem 1.2rem; }
+      .terms-body { padding: 0 1.2rem 1.2rem; }
+    }
+
     /* ── CTA ── */
     .cta-section { padding: 8rem 6rem; text-align: center; position: relative; overflow: hidden; background: var(--cream); }
     .cta-section::before { content: 'bebe log'; position: absolute; font-family: 'DM Serif Display', 'Gowun Batang', serif; font-size: 14vw;  color: var(--blush); opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; }
@@ -1412,6 +1535,138 @@
   </div>
 </section>
 
+<!-- TERMS -->
+<section class="terms-section">
+  <div class="terms-inner">
+    <div class="terms-header reveal">
+      <p class="section-tag">Studio Guide</p>
+      <h2 class="terms-title">이용 안내 및 약관</h2>
+      <p class="terms-sub">예약 전 꼭 확인해 주세요</p>
+    </div>
+    <div class="terms-accordion reveal">
+
+      <!-- 1. 촬영 및 대여 안내 -->
+      <div class="terms-item open">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">📸</span>
+            <span class="terms-trigger-title">1. 촬영 및 대여 안내</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>셀프 촬영 스튜디오</strong>베베로그는 공간 대여 기반의 셀프 스튜디오입니다. 촬영을 위한 개인 스마트폰 또는 카메라를 지참해 주세요.</li>
+            <li><strong>삼각대 무상 제공</strong>휴대폰 및 카메라용 삼각대는 기본으로 무상 대여해 드립니다.</li>
+            <li><strong>카메라 대여(유료) 혜택</strong>카메라 대여 옵션 추가 시, 촬영하신 전체 원본의 톤 보정본(색감 보정)을 3일 이내에 전달해 드립니다.</li>
+            <li><strong>파손 및 오염 주의</strong>스튜디오 내 기물, 의상, 소품에 분실/파손/심한 오염 발생 시 반드시 사전에 고지해 주셔야 하며, 상태에 따라 배상 비용이 청구될 수 있습니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2. 인원 및 의상 대여 규정 -->
+      <div class="terms-item">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">🚨</span>
+            <span class="terms-trigger-title">2. 인원 및 의상 대여 규정</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>기준 인원</strong>예약 기본 인원은 3인(성인 및 아기 포함)이며, 4인 방문 시부터 인원 추가 요금이 발생합니다.</li>
+            <li><strong>반려동물 동반 불가</strong>쾌적한 환경 유지를 위해 반려동물 입장은 제한하고 있습니다.</li>
+            <li><strong>의상 대여 철칙 (1인 1결제)</strong>위생적인 프리미엄 의상 관리를 위해 결제하신 아기 외 형제/자매/쌍둥이/지인 아기의 무료 교차 착용 및 셰어는 절대 불가합니다. (단 1벌을 착용하더라도 착용하는 아기 인원수만큼 대여비를 결제해 주셔야 합니다.)</li>
+            <li><strong>두 가족(친구) 동반 방문 시</strong>아기들의 컨디션 조절을 위해 가급적 연속 2타임(4시간) 예약을 권장합니다. 부득이하게 1타임을 셰어하시더라도 의상 대여비는 아기별로 각각 결제해 주셔야 합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. 이용 시간 및 정리 안내 -->
+      <div class="terms-item">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">⏰</span>
+            <span class="terms-trigger-title">3. 이용 시간 및 정리 안내</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>이용 시간 엄수</strong>예약 시간은 '준비 및 정리 시간(입실~퇴실)'이 모두 포함된 시간입니다. 늦게 도착하시더라도 추가 시간 제공은 어려우니 시간 엄수를 부탁드립니다.</li>
+            <li><strong>퇴실 전 정리</strong>다음 예약자분을 위해 사용하신 의상과 소품은 퇴실하시기 전 원래 자리로 정리를 부탁드립니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. 아기 안전 안내 -->
+      <div class="terms-item">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">👼</span>
+            <span class="terms-trigger-title">4. 아기 안전 안내</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>테이블 세팅</strong>범보의자 또는 방석 중 선택하신 세팅으로 진행됩니다. (백일 전후 아기는 범보의자 사용을 적극 권장합니다.)</li>
+            <li><strong>보호자 주의 의무</strong>촬영 시 아기가 다치지 않도록 보호자의 각별한 주의와 지지가 필수입니다. 부주의로 인한 안전사고에 대해 스튜디오는 책임지지 않으니 항상 아기 곁에서 안전에 유의해 주세요.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5. 음식물 반입 및 주차 안내 -->
+      <div class="terms-item">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">🚗</span>
+            <span class="terms-trigger-title">5. 음식물 반입 및 주차 안내</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>음식물 반입 제한</strong>쾌적한 촬영 환경을 위해 스튜디오 내 음식물 반입은 불가합니다. (단, 생수/음료/커피/아기 간식은 반입 가능)</li>
+            <li><strong>주차 안내</strong>차량 1대당 2시간 무료 주차가 지원됩니다. (카림 상가 내 타 매장 이용 시 합산하여 하루 최대 6시간까지 주차 등록이 가능합니다.)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 6. 예약 변경 및 환불 규정 -->
+      <div class="terms-item">
+        <button class="terms-trigger" onclick="toggleTerms(this)">
+          <div class="terms-trigger-left">
+            <span class="terms-emoji">🗓️</span>
+            <span class="terms-trigger-title">6. 예약 변경 및 환불 규정</span>
+          </div>
+          <span class="terms-arrow">▼</span>
+        </button>
+        <div class="terms-body">
+          <ul class="terms-list">
+            <li><strong>예약 변경</strong>촬영일 3일 전까지 1회에 한해 가능합니다. (당일 변경 불가)</li>
+          </ul>
+          <table class="refund-table">
+            <thead>
+              <tr>
+                <th>취소 시점</th>
+                <th>환불 금액</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>촬영일 7일 전</td><td class="highlight">100% 환불</td></tr>
+              <tr><td>촬영일 3~6일 전</td><td class="highlight">50% 환불</td></tr>
+              <tr><td>촬영일 2일 전 ~ 당일</td><td style="color:var(--muted);">환불 불가</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="reservation">
   <p class="cta-tag reveal">Reservation</p>
@@ -1460,6 +1715,15 @@
   });
   window.addEventListener('resize', adjustHeroHeight);
   setTimeout(adjustHeroHeight, 300);
+
+  function toggleTerms(btn) {
+    const item = btn.closest('.terms-item');
+    const isOpen = item.classList.contains('open');
+    // 전부 닫기
+    document.querySelectorAll('.terms-item').forEach(i => i.classList.remove('open'));
+    // 클릭한 것만 토글
+    if (!isOpen) item.classList.add('open');
+  }
 
   // 모바일 탭바
   function setActiveTab(el) {
