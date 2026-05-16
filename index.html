@@ -1033,7 +1033,7 @@
     .reveal.visible { opacity:1; transform:none; }
 
     /* ── KAKAO FLOATING ── */
-    .kakao-float {
+    .float-buttons {
       position: fixed;
       right: 1.8rem;
       bottom: 2.5rem;
@@ -1041,14 +1041,21 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 0.6rem;
+      gap: 1rem;
+    }
+    .float-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
       animation: floatBob 3s ease-in-out infinite;
     }
+    .float-item:nth-child(2) { animation-delay: 0.4s; }
     @keyframes floatBob {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
     }
-    .kakao-float-tooltip {
+    .float-tooltip {
       background: var(--charcoal);
       color: var(--cream);
       font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
@@ -1058,34 +1065,46 @@
       white-space: nowrap;
       box-shadow: 0 4px 14px rgba(44,36,32,0.18);
       position: relative;
+      transition: opacity 0.4s;
     }
-    .kakao-float-tooltip::after {
+    .float-tooltip::after {
       content: '';
       position: absolute;
-      bottom: -6px; right: 22px;
+      bottom: -6px; right: 20px;
       border: 6px solid transparent;
       border-top-color: var(--charcoal);
       border-bottom: 0;
     }
-    .kakao-float-btn {
+    .float-btn {
       width: 58px; height: 58px;
       border-radius: 50%;
-      background: #FEE500;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 20px rgba(254,229,0,0.5), 0 2px 8px rgba(0,0,0,0.12);
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
     }
-    .kakao-float-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 28px rgba(254,229,0,0.6), 0 4px 12px rgba(0,0,0,0.15);
+    .float-btn:hover { transform: scale(1.1); }
+    /* 카카오 */
+    .float-btn.kakao {
+      background: #FEE500;
+      box-shadow: 0 6px 20px rgba(254,229,0,0.5), 0 2px 8px rgba(0,0,0,0.12);
     }
-    .kakao-float-btn svg { width: 32px; height: 32px; }
+    .float-btn.kakao:hover { box-shadow: 0 10px 28px rgba(254,229,0,0.6), 0 4px 12px rgba(0,0,0,0.15); }
+    .float-btn.kakao svg { width: 32px; height: 32px; }
+    /* 네이버 */
+    .float-btn.naver {
+      background: #03C75A;
+      box-shadow: 0 6px 20px rgba(3,199,90,0.4), 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .float-btn.naver:hover { box-shadow: 0 10px 28px rgba(3,199,90,0.5), 0 4px 12px rgba(0,0,0,0.15); }
+    .float-btn.naver svg { width: 28px; height: 28px; }
+
     @media (max-width: 768px) {
-      .kakao-float { right: 1rem; bottom: 5.5rem; }
-      .kakao-float-btn { width: 50px; height: 50px; }
-      .kakao-float-btn svg { width: 26px; height: 26px; }
-      .kakao-float-tooltip { font-size: 0.66rem; }
+      .float-buttons { right: 1rem; bottom: 5.5rem; }
+      .float-btn { width: 50px; height: 50px; }
+      .float-btn.kakao svg { width: 26px; height: 26px; }
+      .float-btn.naver svg { width: 22px; height: 22px; }
+      .float-tooltip { font-size: 0.66rem; }
     }
 
     /* ── 모바일 하단 탭바 ── */
@@ -1943,17 +1962,34 @@
   </div>
 </section>
 
-<!-- 카카오 플로팅 버튼 -->
-<div class="kakao-float" id="kakaoFloat">
-  <div class="kakao-float-tooltip">💬 카카오로 바로 문의하기</div>
-  <a href="https://pf.kakao.com/_lYixkn/chat" target="_blank" class="kakao-float-btn" aria-label="카카오톡 문의">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 3C6.477 3 2 6.582 2 11c0 2.709 1.573 5.096 3.99 6.596L5 21l3.703-2.013C9.744 19.3 10.855 19.5 12 19.5c5.523 0 10-3.582 10-8s-4.477-8.5-10-8.5z" fill="#3C1E1E"/>
-      <circle cx="8.5" cy="11" r="1.2" fill="#FEE500"/>
-      <circle cx="12" cy="11" r="1.2" fill="#FEE500"/>
-      <circle cx="15.5" cy="11" r="1.2" fill="#FEE500"/>
-    </svg>
-  </a>
+<!-- 플로팅 버튼 묶음 -->
+<div class="float-buttons" id="floatButtons">
+
+  <!-- 네이버 예약 -->
+  <div class="float-item">
+    <div class="float-tooltip" id="naverTooltip">📅 날짜 바로 확인하기</div>
+    <a href="https://map.naver.com/p/entry/place/2025048254" target="_blank" class="float-btn naver" aria-label="네이버 예약">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.5 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-8.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M16 3h5v5M21 3l-9 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 12h4M8 16h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- 카카오 문의 -->
+  <div class="float-item">
+    <div class="float-tooltip" id="kakaoTooltip">💬 카카오로 바로 문의하기</div>
+    <a href="https://pf.kakao.com/_lYixkn/chat" target="_blank" class="float-btn kakao" aria-label="카카오톡 문의">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3C6.477 3 2 6.582 2 11c0 2.709 1.573 5.096 3.99 6.596L5 21l3.703-2.013C9.744 19.3 10.855 19.5 12 19.5c5.523 0 10-3.582 10-8s-4.477-8.5-10-8.5z" fill="#3C1E1E"/>
+        <circle cx="8.5" cy="11" r="1.2" fill="#FEE500"/>
+        <circle cx="12" cy="11" r="1.2" fill="#FEE500"/>
+        <circle cx="15.5" cy="11" r="1.2" fill="#FEE500"/>
+      </svg>
+    </a>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -1994,16 +2030,19 @@
   window.addEventListener('resize', adjustHeroHeight);
   setTimeout(adjustHeroHeight, 300);
 
-  // 카카오 플로팅 툴팁 - 5초 후 살짝 페이드, hover 시 다시 표시
-  const kakaoTooltip = document.querySelector('.kakao-float-tooltip');
-  const kakaoFloat = document.getElementById('kakaoFloat');
-  if (kakaoTooltip) {
-    setTimeout(() => { kakaoTooltip.style.opacity = '0'; kakaoTooltip.style.transition = 'opacity 0.5s'; }, 4000);
-    kakaoFloat.addEventListener('mouseenter', () => { kakaoTooltip.style.opacity = '1'; });
-    kakaoFloat.addEventListener('mouseleave', () => { kakaoTooltip.style.opacity = '0'; });
-    // 모바일 탭 시 다시 보이게
-    kakaoFloat.addEventListener('touchstart', () => { kakaoTooltip.style.opacity = '1'; setTimeout(() => { kakaoTooltip.style.opacity = '0'; }, 2000); });
-  }
+  // 플로팅 툴팁 - 4초 후 사라지고 hover 시 다시 표시
+  ['naverTooltip', 'kakaoTooltip'].forEach((id, i) => {
+    const tooltip = document.getElementById(id);
+    const item = tooltip?.closest('.float-item');
+    if (!tooltip || !item) return;
+    setTimeout(() => { tooltip.style.opacity = '0'; }, 3500 + i * 400);
+    item.addEventListener('mouseenter', () => { tooltip.style.opacity = '1'; });
+    item.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
+    item.addEventListener('touchstart', () => {
+      tooltip.style.opacity = '1';
+      setTimeout(() => { tooltip.style.opacity = '0'; }, 2000);
+    });
+  });
 
   // 리뷰 슬라이더
   function reviewSlide(dir) {
