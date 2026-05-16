@@ -465,6 +465,172 @@
       padding-left: 0.6rem;
     }
 
+    /* ── REVIEWS ── */
+    .reviews-section {
+      background: var(--warm-white);
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 0 6rem;
+    }
+    .reviews-title {
+      font-family: 'Gowun Batang', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .reviews-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .reviews-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .reviews-stars { color: #f5a623; font-size: 1.1rem; letter-spacing: 0.1em; }
+    .reviews-score { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--charcoal); }
+    .reviews-count { font-size: 0.8rem; color: var(--muted); }
+
+    /* 슬라이더 래퍼 */
+    .reviews-slider-wrap {
+      position: relative;
+    }
+    .reviews-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 0.5rem 6rem 2rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      cursor: grab;
+    }
+    .reviews-track:active { cursor: grabbing; }
+    .reviews-track::-webkit-scrollbar { height: 4px; }
+    .reviews-track::-webkit-scrollbar-track { background: var(--blush); }
+    .reviews-track::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 2px; }
+
+    .review-card {
+      flex-shrink: 0;
+      width: 280px;
+      scroll-snap-align: start;
+      background: var(--cream);
+      border: 1px solid var(--blush);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(156,110,90,0.12);
+    }
+    .review-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .review-card:hover img { transform: scale(1.03); }
+    .review-card-label {
+      padding: 0.8rem 1rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .review-naver-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: #03c75a;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    /* 슬라이더 버튼 */
+    .reviews-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--cream);
+      border: 1px solid var(--blush);
+      color: var(--charcoal);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(44,36,32,0.1);
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 5;
+    }
+    .reviews-btn:hover { background: var(--blush); border-color: var(--rose); }
+    .reviews-btn.r-prev { left: 1.5rem; }
+    .reviews-btn.r-next { right: 1.5rem; }
+
+    /* 리뷰 라이트박스 */
+    .review-lb-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    .review-lb-overlay.open { display: flex; }
+    .review-lb-img {
+      max-width: min(500px, 90vw);
+      max-height: 88vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .review-lb-close {
+      position: fixed; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; color: #fff;
+      font-size: 2rem; cursor: pointer; opacity: 0.7;
+      transition: opacity 0.2s; line-height: 1;
+    }
+    .review-lb-close:hover { opacity: 1; }
+    .review-lb-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; width: 48px; height: 48px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem; transition: background 0.2s;
+    }
+    .review-lb-arrow:hover { background: rgba(255,255,255,0.3); }
+    .review-lb-arrow.rlb-prev { left: 1.2rem; }
+    .review-lb-arrow.rlb-next { right: 1.2rem; }
+    .review-lb-counter {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 768px) {
+      .reviews-section { padding: 3rem 0; }
+      .reviews-header { padding: 0 1.2rem; margin-bottom: 2rem; }
+      .reviews-track { padding: 0.5rem 1.2rem 1.5rem; gap: 10px; }
+      .review-card { width: 220px; }
+      .reviews-btn { display: none; }
+    }
+
     /* ── EVENTS ── */
     .events { padding: 6rem; max-width: 1100px; margin: 0 auto; }
     .events-header { margin-bottom: 3rem; }
@@ -1384,6 +1550,49 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header reveal">
+    <p class="section-tag">Real Review</p>
+    <h2 class="reviews-title">실제 방문 후기</h2>
+    <div class="reviews-rating">
+      <span class="reviews-stars">★★★★★</span>
+      <span class="reviews-score">4.9</span>
+      <span class="reviews-count">· 네이버 플레이스 리뷰</span>
+    </div>
+    <p class="reviews-sub">직접 방문하신 분들의 솔직한 후기예요</p>
+  </div>
+  <div class="reviews-slider-wrap reveal">
+    <button class="reviews-btn r-prev" onclick="reviewSlide(-1)">&#8592;</button>
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-card" onclick="openReviewLb(0)"><img src="review_1.webp" alt="베베로그 후기 1" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(1)"><img src="review_2.webp" alt="베베로그 후기 2" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(2)"><img src="review_3.webp" alt="베베로그 후기 3" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(3)"><img src="review_4.webp" alt="베베로그 후기 4" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(4)"><img src="review_5.webp" alt="베베로그 후기 5" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(5)"><img src="review_6.webp" alt="베베로그 후기 6" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(6)"><img src="review_7.webp" alt="베베로그 후기 7" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(7)"><img src="review_8.webp" alt="베베로그 후기 8" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(8)"><img src="review_9.webp" alt="베베로그 후기 9" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(9)"><img src="review_10.webp" alt="베베로그 후기 10" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(10)"><img src="review_11.webp" alt="베베로그 후기 11" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(11)"><img src="review_12.webp" alt="베베로그 후기 12" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(12)"><img src="review_13.webp" alt="베베로그 후기 13" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+      <div class="review-card" onclick="openReviewLb(13)"><img src="review_14.webp" alt="베베로그 후기 14" loading="lazy"><div class="review-card-label"><span class="review-naver-badge">N 네이버</span> 방문자 리뷰</div></div>
+    </div>
+    <button class="reviews-btn r-next" onclick="reviewSlide(1)">&#8594;</button>
+  </div>
+</section>
+
+<!-- 리뷰 라이트박스 -->
+<div class="review-lb-overlay" id="reviewLb" onclick="closeReviewLbOnBg(event)">
+  <button class="review-lb-close" onclick="closeReviewLb()">✕</button>
+  <button class="review-lb-arrow rlb-prev" onclick="rlbSlide(-1)">&#8592;</button>
+  <img class="review-lb-img" id="reviewLbImg" src="" alt="후기">
+  <button class="review-lb-arrow rlb-next" onclick="rlbSlide(1)">&#8594;</button>
+  <div class="review-lb-counter" id="reviewLbCounter"></div>
+</div>
+
 <!-- EVENTS -->
 <section class="events">
   <div class="events-header reveal">
@@ -1715,6 +1924,49 @@
   });
   window.addEventListener('resize', adjustHeroHeight);
   setTimeout(adjustHeroHeight, 300);
+
+  // 리뷰 슬라이더
+  function reviewSlide(dir) {
+    const track = document.getElementById('reviewsTrack');
+    track.scrollBy({ left: dir * 300, behavior: 'smooth' });
+  }
+  // 드래그 스크롤
+  const rTrack = document.getElementById('reviewsTrack');
+  let rDragging = false, rStartX, rScrollLeft;
+  rTrack.addEventListener('mousedown', e => { rDragging = true; rStartX = e.pageX - rTrack.offsetLeft; rScrollLeft = rTrack.scrollLeft; });
+  rTrack.addEventListener('mouseleave', () => rDragging = false);
+  rTrack.addEventListener('mouseup', () => rDragging = false);
+  rTrack.addEventListener('mousemove', e => {
+    if (!rDragging) return;
+    e.preventDefault();
+    rTrack.scrollLeft = rScrollLeft - (e.pageX - rTrack.offsetLeft - rStartX);
+  });
+
+  // 리뷰 라이트박스
+  const reviewSrcs = Array.from({length: 14}, (_, i) => `review_${i+1}.webp`);
+  let rlbIdx = 0;
+  function openReviewLb(idx) {
+    rlbIdx = idx; updateReviewLb();
+    document.getElementById('reviewLb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeReviewLb() {
+    document.getElementById('reviewLb').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeReviewLbOnBg(e) { if (e.target === document.getElementById('reviewLb')) closeReviewLb(); }
+  function rlbSlide(dir) { rlbIdx = (rlbIdx + dir + reviewSrcs.length) % reviewSrcs.length; updateReviewLb(); }
+  function updateReviewLb() {
+    document.getElementById('reviewLbImg').src = reviewSrcs[rlbIdx];
+    document.getElementById('reviewLbCounter').textContent = (rlbIdx + 1) + ' / ' + reviewSrcs.length;
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('reviewLb');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') rlbSlide(-1);
+    if (e.key === 'ArrowRight') rlbSlide(1);
+    if (e.key === 'Escape') closeReviewLb();
+  });
 
   function toggleTerms(btn) {
     const item = btn.closest('.terms-item');
