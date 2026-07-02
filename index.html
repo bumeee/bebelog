@@ -2345,7 +2345,12 @@
   });
 
   // 리뷰 라이트박스
-  const reviewSrcs = ['review_0.webp', ...Array.from({length: 14}, (_, i) => `review_${i+1}.webp`)];
+  const reviewSrcs = [
+    'review_00.webp', 'review_01.webp', 'review_02.webp',
+    'review_0.webp', 'review_1.webp', 'review_2.webp', 'review_3.webp',
+    'review_4.webp', 'review_5.webp', 'review_6.webp', 'review_7.webp',
+    'review_8.webp', 'review_9.webp', 'review_10.webp', 'review_11.webp'
+  ];
   let rlbIdx = 0;
   function openReviewLb(idx) {
     rlbIdx = idx; updateReviewLb();
