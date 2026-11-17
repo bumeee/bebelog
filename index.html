@@ -365,6 +365,68 @@
       .concept-tab-btn { padding: 0.7rem 1.2rem; font-size: 0.82rem; }
     }
 
+
+    /* ── CHRISTMAS EVENT ── */
+    .xmas-bar {
+      position: absolute; top: 118px; left: 50%; transform: translateX(-50%);
+      z-index: 6;
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: #8a3a34; color: var(--cream);
+      text-decoration: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.86rem; font-weight: 400; letter-spacing: 0.02em;
+      box-shadow: 0 4px 18px rgba(138,58,52,0.28);
+      white-space: nowrap;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .xmas-bar:hover { background: #6f2c27; transform: translateX(-50%) translateY(-1px); }
+    .xmas-bar-new {
+      background: var(--cream); color: #8a3a34;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+      padding: 0.18rem 0.55rem; border-radius: 999px;
+    }
+    .xmas-bar-arrow { opacity: 0.85; }
+    .concept-tab-btn.xmas-tab { color: #8a3a34; }
+    .concept-tab-btn.xmas-tab.active { color: #8a3a34; border-bottom-color: #8a3a34; }
+    .xmas-tab-new {
+      display: inline-block; vertical-align: middle; margin-left: 0.35rem;
+      background: #8a3a34; color: var(--cream);
+      font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em;
+      padding: 0.12rem 0.4rem; border-radius: 999px;
+    }
+    .xmas-note {
+      background: #f7ece9; border: 1px solid #e6cfc9;
+      color: #8a3a34; font-size: 0.84rem; line-height: 1.7;
+      padding: 0.9rem 1.1rem; margin-bottom: 1rem; border-radius: 2px;
+    }
+    .xmas-note strong { font-weight: 500; }
+    .concept-notice {
+      margin-top: 0.7rem; font-size: 0.8rem; color: #8a3a34; letter-spacing: 0.02em;
+    }
+    .xmas-price-notice {
+      display: flex; align-items: center; gap: 1rem;
+      background: #f7ece9; border: 1px solid #e6cfc9;
+      padding: 1.1rem 1.5rem; margin: 1.5rem 0 3rem; border-radius: 2px;
+    }
+    .xmas-price-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+    .xmas-price-text { font-size: 0.88rem; line-height: 1.7; color: var(--charcoal); }
+    .xmas-price-text strong { color: #8a3a34; font-weight: 500; }
+    .xmas-price-amount { margin-left: auto; font-family: 'DM Serif Display','Gowun Batang',serif; font-size: 1.4rem; color: #8a3a34; white-space: nowrap; }
+    .xmas-price-amount span { font-family: 'Pretendard',sans-serif; font-size: 0.75rem; color: var(--muted); }
+    @media (max-width: 768px) {
+      .xmas-bar {
+        position: relative; top: auto; left: auto; transform: none;
+        display: flex; justify-content: center; gap: 0.5rem;
+        width: 100%; height: 40px; align-items: center; border-radius: 0; box-shadow: none;
+        padding: 0 0.8rem; font-size: 0.78rem; white-space: nowrap; text-align: center;
+      }
+      .xmas-bar:hover { transform: none; }
+      .xmas-price-notice { flex-wrap: wrap; gap: 0.6rem 0.8rem; padding: 1rem; margin: 1.2rem 0 2rem; }
+      .xmas-price-amount { margin-left: 0; width: 100%; font-size: 1.2rem; }
+      .xmas-note { font-size: 0.8rem; padding: 0.8rem 0.9rem; }
+    }
+
     /* ── COSTUME ── */
     .costume { background: var(--charcoal); padding: 6rem; color: var(--cream); }
     .costume-inner { max-width: 1200px; margin: 0 auto; }
@@ -1375,7 +1437,7 @@
       .hero-arrow {
         font-size: 1.4rem; width: 32px; height: 32px;
         /* 슬라이드 영역 안 세로 중앙 */
-        top: calc(56px + (100vw * 3/4) / 2);
+        top: calc(56px + 40px + (100vw * 3/4) / 2);
       }
 
       /* ABOUT */
@@ -1488,6 +1550,11 @@
 
 <!-- HERO SLIDESHOW -->
 <section class="hero">
+  <a href="#concept" class="xmas-bar" onclick="goXmas(event)">
+    <span class="xmas-bar-new">NEW</span>
+    <span>🎄 크리스마스 이벤트 컨셉 운영 중</span>
+    <span class="xmas-bar-arrow">→</span>
+  </a>
   <div class="hero-slides">
     <div class="hero-slide active" data-fit="cover"><img src="main_1.webp" alt="베베로그 스튜디오" loading="eager"></div>
     <div class="hero-slide" data-fit="cover"><img src="main_2.webp" alt="베베로그 스튜디오" loading="lazy"></div>
@@ -1522,8 +1589,9 @@
   <div class="concept-inner">
     <div class="concept-header reveal">
       <p class="section-tag">Photo Zone</p>
-      <h2 class="concept-title">6가지 <em>포토존 컨셉</em></h2>
-      <p class="concept-sub">촬영 당일 모든 포토존을 자유롭게 이용하실 수 있어요</p>
+      <h2 class="concept-title">7가지 <em>포토존 컨셉</em></h2>
+      <p class="concept-sub">촬영 당일 포토존을 자유롭게 이용하실 수 있어요</p>
+      <p class="concept-notice">🎄 크리스마스 이벤트 컨셉은 셀프촬영 시 30,000원 추가 시 이용 가능해요</p>
     </div>
 
     <!-- 컨셉 탭 버튼 -->
@@ -1534,8 +1602,9 @@
       <button class="concept-tab-btn" onclick="switchConcept(3, this)">컨셉 4</button>
       <button class="concept-tab-btn" onclick="switchConcept(4, this)">컨셉 5</button>
       <button class="concept-tab-btn" onclick="switchConcept(5, this)">컨셉 6</button>
-      <button class="concept-tab-btn" onclick="switchConcept(6, this)">스튜디오 전경</button>
-      <button class="concept-tab-btn" onclick="switchConcept(7, this)">수유실</button>
+      <button class="concept-tab-btn xmas-tab" id="xmasTab" onclick="switchConcept(6, this)">🎄 크리스마스<span class="xmas-tab-new">NEW</span></button>
+      <button class="concept-tab-btn" onclick="switchConcept(7, this)">스튜디오 전경</button>
+      <button class="concept-tab-btn" onclick="switchConcept(8, this)">수유실</button>
     </div>
 
     <!-- 컨셉 패널 -->
@@ -1606,8 +1675,23 @@
           </div>
         </div>
       </div>
-      <!-- 스튜디오 전경 -->
+      <!-- 크리스마스 이벤트 컨셉 -->
       <div class="concept-panel" id="concept-6">
+        <div class="xmas-note">
+          🎄 <strong>크리스마스 이벤트 컨셉</strong><br>
+          셀프촬영은 <strong>30,000원 추가</strong> 시 이용 가능해요.
+        </div>
+        <div class="concept-layout">
+          <div class="concept-main-img">
+            <img src="santa1.webp" alt="크리스마스 이벤트 포토존" loading="lazy">
+          </div>
+          <div class="concept-babies">
+            <img src="santa2.webp" alt="크리스마스 컨셉 촬영 예시" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <!-- 스튜디오 전경 -->
+      <div class="concept-panel" id="concept-7">
         <div class="fullview-grid">
           <div class="fullview-item"><img src="Full_view_1.webp" alt="스튜디오 전경 1" loading="lazy"></div>
           <div class="fullview-item"><img src="Full_view_2.webp" alt="스튜디오 전경 2" loading="lazy"></div>
@@ -1616,7 +1700,7 @@
         </div>
       </div>
       <!-- 수유실 -->
-      <div class="concept-panel" id="concept-7">
+      <div class="concept-panel" id="concept-8">
         <div class="fullview-grid fullview-grid--half">
           <div class="fullview-item"><img src="suyu_1.webp" alt="수유실 1" loading="lazy"></div>
           <div class="fullview-item"><img src="suyu_2.webp" alt="수유실 2" loading="lazy"></div>
@@ -1626,7 +1710,7 @@
 
     <!-- 전체 한눈에 보기 -->
     <div class="concept-all reveal">
-      <p class="concept-all-label">✦ 6가지 포토존 한눈에 보기</p>
+      <p class="concept-all-label">✦ 포토존 한눈에 보기</p>
       <img src="concept_all.webp" alt="전체 포토존" loading="lazy">
     </div>
   </div>
@@ -1759,7 +1843,7 @@
           <div class="base-card-note">최소 예약: 2시간 (60,000원~)<br>월 ~ 금 · 공휴일 제외</div>
           <div class="base-card-include">
             <strong>포함</strong>
-            <span>✓ 단독 대관 (6컨셉 자유이용)</span>
+            <span>✓ 단독 대관 (일반 6컨셉 자유이용)</span>
             <span>✓ 삼각대 무상 대여</span>
           </div>
         </div>
@@ -1770,10 +1854,18 @@
           <div class="base-card-note">최소 예약: 2시간 (70,000원~)<br>토 · 일 · 공휴일</div>
           <div class="base-card-include">
             <strong>포함</strong>
-            <span>✓ 단독 대관 (6컨셉 자유이용)</span>
+            <span>✓ 단독 대관 (일반 6컨셉 자유이용)</span>
             <span>✓ 삼각대 무상 대여</span>
           </div>
         </div>
+      </div>
+      <div class="xmas-price-notice reveal">
+        <div class="xmas-price-icon">🎄</div>
+        <div class="xmas-price-text">
+          <strong>크리스마스 이벤트 컨셉</strong>은 기본 이용에 포함되지 않아요.<br>
+          촬영을 원하시면 추가 요금으로 이용하실 수 있어요.
+        </div>
+        <div class="xmas-price-amount">+30,000<span>원</span></div>
       </div>
       <h3 class="options-title reveal">추가 옵션 <span style="font-size:0.8rem;font-weight:300;color:var(--muted);">(셀프촬영 전용)</span></h3>
       <div class="options-grid reveal">
@@ -1834,7 +1926,7 @@
           </div>
           <ul class="pro-card-includes">
             <li>1시간 내외 프라이빗 단독대관</li>
-            <li>6가지 컨셉 중 원하는 3컨셉 선택</li>
+            <li>7가지 컨셉(크리스마스 이벤트 포함) 중 원하는 3컨셉 선택</li>
             <li>프리미엄 아기 의상 3벌 대여 (드레스 / 수트 / 한복 중 택 3)</li>
             <li>고화질 원본 전체 + 보정본 포함 제공 </li>
           </ul>
@@ -1845,7 +1937,7 @@
           <div style="position:absolute;top:0;right:0;background:var(--deep-rose);color:var(--cream);font-size:0.68rem;font-weight:600;padding:0.4rem 1.2rem;letter-spacing:0.12em;">BEST</div>
           <div class="pro-card-badge premium" style="background:var(--deep-rose);font-size:0.72rem;padding:0.3rem 1rem;">⭐ 베스트 추천</div>
           <div class="pro-card-title" style="font-size:1.6rem;color:var(--deep-rose);font-weight:700;margin-bottom:0.3rem;">가성비 프리미엄 패키지</div>
-          <div class="pro-card-summary" style="color:var(--charcoal);font-weight:500;"><strong>2시간 내외</strong> · <strong>6컨셉 전체</strong> · <strong>의상 무제한</strong> · 원본 전체 · 보정본 10장</div>
+          <div class="pro-card-summary" style="color:var(--charcoal);font-weight:500;"><strong>2시간 내외</strong> · <strong>7컨셉 중 5컨셉 선택</strong> · <strong>의상 무제한</strong> · 원본 전체 · 보정본 10장</div>
           <div class="pro-card-prices">
             <div class="pro-card-price-item" style="background:rgba(156,110,90,0.08);">
               <div class="pro-card-price-label">평일</div>
@@ -1861,9 +1953,9 @@
           </div>
           <ul class="pro-card-includes">
             <li><strong style="color:var(--deep-rose);font-size:0.88rem;">⏱ 2시간 내외</strong> 프라이빗 단독대관</li>
-            <li><strong style="color:var(--deep-rose);font-size:0.88rem;">📸 6가지 컨셉 전체</strong> 촬영</li>
+            <li><strong style="color:var(--deep-rose);font-size:0.88rem;">📸 7가지 컨셉 중 5컨셉 선택</strong> 촬영 <span style="color:var(--muted);">(크리스마스 이벤트 포함)</span></li>
             <li>전체 프리미엄 의상 <strong style="color:var(--deep-rose);font-size:0.88rem;">무제한 환복</strong> <span style="color:var(--muted);">(약 50여 벌)</span></li>
-            <li>고화질 원본 <strong style="color:var(--deep-rose);font-size:0.88rem;">전체</strong> + 보정본 포함 제공 <strong style="color:var(--deep-rose);font-size:0.88rem;">
+            <li>고화질 원본 <strong style="color:var(--deep-rose);font-size:0.88rem;">전체</strong> + 보정본 포함 제공</li>
           </ul>
         </div>
 
@@ -2125,6 +2217,7 @@
           <ul class="terms-list">
             <li><strong>셀프 촬영 안내</strong>공간 대여 기반의 셀프 촬영 상품으로, 개인 스마트폰 또는 카메라를 지참해 주세요.</li>
             <li><strong>삼각대 무상 제공 (셀프 촬영)</strong>휴대폰 및 카메라용 삼각대는 기본으로 무상 대여해 드립니다.</li>
+            <li><strong>크리스마스 이벤트 컨셉 (셀프 촬영)</strong>셀프 촬영 기본 이용에는 크리스마스 이벤트 컨셉이 포함되지 않으며, 30,000원 추가 시 이용하실 수 있습니다.</li>
             <li><strong>카메라 대여(유료) (셀프 촬영)</strong>카메라 대여 옵션 선택 시 촬영하신 전체 원본을 3일 이내에 전달해 드립니다.</li>
             <li><strong>작가 촬영 안내</strong>전문 작가와 함께하는 촬영 상품입니다. 아기 컨디션에 맞춰 1시간~2시간 내외로 진행되며, 아기 의상 대여가 포함됩니다. 촬영 후 전체 원본과 보정본을 3일 이내에 전달해 드립니다.</li>
             <li><strong>파손 및 오염 주의</strong>스튜디오 내 기물, 의상, 소품에 분실/파손/심한 오염 발생 시 반드시 사전에 고지해 주셔야 하며, 상태에 따라 배상 비용이 청구될 수 있습니다.</li>
@@ -2477,6 +2570,12 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
     event.target.classList.add('active');
+  }
+
+  function goXmas(e) {
+    e.preventDefault();
+    switchConcept(6, document.getElementById('xmasTab'));
+    document.getElementById('concept').scrollIntoView({ behavior: 'smooth' });
   }
 
   function switchConcept(idx, btn) {
