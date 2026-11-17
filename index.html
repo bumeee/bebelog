@@ -338,6 +338,34 @@
       .fullview-grid--half { grid-template-columns: 1fr; }
     }
 
+
+    /* ── CONCEPT TABS SWIPE HINT ── */
+    .concept-tabs-wrap { position: relative; margin-bottom: 2rem; }
+    .concept-tabs-wrap .concept-tabs { margin-bottom: 0; position: relative; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .concept-tabs-wrap .concept-tabs::-webkit-scrollbar { display: none; }
+    .tabs-fade {
+      position: absolute; top: 0; bottom: 1px; width: 56px;
+      display: none; align-items: center;
+      pointer-events: none; z-index: 2;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .tabs-fade.right { right: 0; justify-content: flex-end; background: linear-gradient(to right, rgba(253,250,247,0), var(--warm-white) 70%); }
+    .tabs-fade.left { left: 0; justify-content: flex-start; background: linear-gradient(to left, rgba(253,250,247,0), var(--warm-white) 70%); }
+    .tabs-fade span { font-size: 1.5rem; color: var(--deep-rose); padding: 0 0.3rem; line-height: 1; }
+    .tabs-fade.right span { animation: tabsNudgeR 1.3s ease-in-out infinite; }
+    .tabs-fade.left span { animation: tabsNudgeL 1.3s ease-in-out infinite; }
+    @keyframes tabsNudgeR { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+    @keyframes tabsNudgeL { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+    .concept-tabs-wrap.can-right .tabs-fade.right { display: flex; opacity: 1; }
+    .concept-tabs-wrap.can-left .tabs-fade.left { display: flex; opacity: 1; }
+    .tabs-swipe-text { display: none; }
+    @media (max-width: 768px) {
+      .tabs-swipe-text {
+        display: block; text-align: right; font-size: 0.72rem; color: var(--muted);
+        letter-spacing: 0.03em; margin: -0.6rem 0 0.8rem;
+      }
+    }
+
     /* ── CONCEPT ALL ── */
     .concept-all {
       margin-top: 3rem;
@@ -418,8 +446,8 @@
       .xmas-bar {
         position: relative; top: auto; left: auto; transform: none;
         display: flex; justify-content: center; gap: 0.5rem;
-        width: 100%; height: 40px; align-items: center; border-radius: 0; box-shadow: none;
-        padding: 0 0.8rem; font-size: 0.78rem; white-space: nowrap; text-align: center;
+        width: 100%; height: 52px; align-items: center; border-radius: 0; box-shadow: none;
+        padding: 12px 0.8rem 0; font-size: 0.78rem; white-space: nowrap; text-align: center;
       }
       .xmas-bar:hover { transform: none; }
       .xmas-price-notice { flex-wrap: wrap; gap: 0.6rem 0.8rem; padding: 1rem; margin: 1.2rem 0 2rem; }
@@ -1437,7 +1465,7 @@
       .hero-arrow {
         font-size: 1.4rem; width: 32px; height: 32px;
         /* 슬라이드 영역 안 세로 중앙 */
-        top: calc(56px + 40px + (100vw * 3/4) / 2);
+        top: calc(56px + 52px + (100vw * 3/4) / 2);
       }
 
       /* ABOUT */
@@ -1595,7 +1623,8 @@
     </div>
 
     <!-- 컨셉 탭 버튼 -->
-    <div class="concept-tabs reveal">
+    <div class="concept-tabs-wrap" id="conceptTabsWrap">
+    <div class="concept-tabs reveal" id="conceptTabs">
       <button class="concept-tab-btn active" onclick="switchConcept(0, this)">컨셉 1</button>
       <button class="concept-tab-btn" onclick="switchConcept(1, this)">컨셉 2</button>
       <button class="concept-tab-btn" onclick="switchConcept(2, this)">컨셉 3</button>
@@ -1606,6 +1635,10 @@
       <button class="concept-tab-btn" onclick="switchConcept(7, this)">스튜디오 전경</button>
       <button class="concept-tab-btn" onclick="switchConcept(8, this)">수유실</button>
     </div>
+    <div class="tabs-fade left"><span>‹</span></div>
+    <div class="tabs-fade right"><span>›</span></div>
+    </div>
+    <p class="tabs-swipe-text">← 옆으로 넘겨서 7가지 컨셉을 모두 확인하세요 →</p>
 
     <!-- 컨셉 패널 -->
     <div class="concept-panels reveal">
@@ -2583,7 +2616,44 @@
     document.querySelectorAll('.concept-tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('concept-' + idx).classList.add('active');
     btn.classList.add('active');
+    // 선택한 탭이 화면 가운데 오도록 가로 스크롤 (세로 스크롤은 건드리지 않음)
+    const tabs = document.getElementById('conceptTabs');
+    if (tabs) tabs.scrollTo({ left: btn.offsetLeft - (tabs.clientWidth - btn.offsetWidth) / 2, behavior: 'smooth' });
   }
+
+  // 컨셉 탭 스와이프 힌트 (그라데이션 + 화살표 + 첫 진입 시 살짝 넘겨주기)
+  (function () {
+    const wrap = document.getElementById('conceptTabsWrap');
+    const tabs = document.getElementById('conceptTabs');
+    if (!wrap || !tabs) return;
+    let touched = false;
+    function updateTabsHint() {
+      const max = tabs.scrollWidth - tabs.clientWidth;
+      wrap.classList.toggle('can-right', max > 4 && tabs.scrollLeft < max - 4);
+      wrap.classList.toggle('can-left', max > 4 && tabs.scrollLeft > 4);
+    }
+    tabs.addEventListener('scroll', updateTabsHint, { passive: true });
+    tabs.addEventListener('touchstart', () => { touched = true; }, { passive: true });
+    window.addEventListener('resize', updateTabsHint);
+    window.addEventListener('load', updateTabsHint);
+    updateTabsHint();
+
+    const nudgeObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        nudgeObs.disconnect();
+        const max = tabs.scrollWidth - tabs.clientWidth;
+        if (max > 4 && tabs.scrollLeft === 0 && !touched) {
+          setTimeout(() => {
+            if (touched) return;
+            tabs.scrollTo({ left: 90, behavior: 'smooth' });
+            setTimeout(() => { if (!touched) tabs.scrollTo({ left: 0, behavior: 'smooth' }); }, 800);
+          }, 500);
+        }
+      });
+    }, { threshold: 0.8 });
+    nudgeObs.observe(wrap);
+  })();
 
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
